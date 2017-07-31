@@ -1,0 +1,13 @@
+﻿textarea {
+    resize: none;
+    
+    &.textarea--row4 {
+        height: 83px;
+        margin-bottom: 0;
+    }
+
+    &.textarea--row14 {
+        height: 280px;
+        margin-bottom: 0;
+    }
+}

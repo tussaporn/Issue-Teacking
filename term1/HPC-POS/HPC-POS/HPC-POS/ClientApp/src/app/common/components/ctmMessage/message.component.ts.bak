@@ -1,0 +1,117 @@
+import { 
+    Component,
+    ViewChild
+}                                   from "@angular/core";
+
+import { GlobalState }              from "../../../global.state";
+import {
+    MESSAGE_GLOBAL_KEY,
+    MESSAGE_DIALOG_TYPE,
+    MESSAGE_DIALOG_RETURN_TYPE
+}                                   from "../../common.constant";
+import { Md2Dialog }                from "../dialog";
+
+@Component({
+    selector: "ctm-message",
+    templateUrl: "./message.component.html"
+})
+export class CtmMessage {
+    @ViewChild("messageDlg") messageDlg: Md2Dialog;
+
+    private message: string;
+    private returnToCaller: Function;
+    private messageType: MESSAGE_DIALOG_TYPE;
+    private returnType: MESSAGE_DIALOG_RETURN_TYPE;
+
+    constructor(
+        private global: GlobalState
+    ) {
+        this.messageType = MESSAGE_DIALOG_TYPE.INFORMATION;
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.OK;
+
+        this.global.subscribe(MESSAGE_GLOBAL_KEY, (data) => {
+            this.message = data.message;
+            this.messageType = data.type;
+
+            if (this.messageType == MESSAGE_DIALOG_TYPE.INFORMATION
+                || this.messageType == MESSAGE_DIALOG_TYPE.WARNING) {
+                this.returnType = MESSAGE_DIALOG_RETURN_TYPE.OK;
+            }
+            else if (this.messageType == MESSAGE_DIALOG_TYPE.ERROR) {
+                this.returnType = MESSAGE_DIALOG_RETURN_TYPE.CLOSE;
+            }
+            else if (this.messageType == MESSAGE_DIALOG_TYPE.QUESTION) {
+                this.returnType = MESSAGE_DIALOG_RETURN_TYPE.NO;
+            }
+            else if (this.messageType == MESSAGE_DIALOG_TYPE.QUESTION_WITH_CANCEL) {
+                this.returnType = MESSAGE_DIALOG_RETURN_TYPE.CANCEL;
+            }
+
+            this.returnToCaller = data.caller;
+            this.messageDlg.open();
+        });
+    }
+
+    private onOKClick() {
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.OK;
+        this.messageDlg.close();
+    }
+    private onCloseClick() {
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.CLOSE;
+        this.messageDlg.close();
+    }
+    private onYesClick() {
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.YES;
+        this.messageDlg.close();
+    }
+    private onNoClick() {
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.NO;
+        this.messageDlg.close();
+    }
+    private onCancelClick() {
+        this.returnType = MESSAGE_DIALOG_RETURN_TYPE.CANCEL;
+        this.messageDlg.close();
+    }
+
+    private get showInfoIcon() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.INFORMATION;
+    }
+    private get showWarningIcon() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.WARNING
+                || this.messageType == MESSAGE_DIALOG_TYPE.WARNING_QUESTION;
+    }
+    private get showErrorIcon() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.ERROR;
+    }
+    private get showQuestionIcon() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.QUESTION
+            || this.messageType == MESSAGE_DIALOG_TYPE.QUESTION_WITH_CANCEL;
+    }
+
+    private get showOKButton() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.INFORMATION
+            || this.messageType == MESSAGE_DIALOG_TYPE.WARNING
+            || this.messageType == MESSAGE_DIALOG_TYPE.WARNING_QUESTION;
+    }
+    private get showCloseButton() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.ERROR;
+    }
+    private get showYesButton() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.QUESTION
+            || this.messageType == MESSAGE_DIALOG_TYPE.QUESTION_WITH_CANCEL;
+    }
+    private get showNoButton() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.QUESTION
+            || this.messageType == MESSAGE_DIALOG_TYPE.QUESTION_WITH_CANCEL;
+    }
+    private get showCancelButton() {
+        return this.messageType == MESSAGE_DIALOG_TYPE.QUESTION_WITH_CANCEL
+                || this.messageType == MESSAGE_DIALOG_TYPE.WARNING_QUESTION;
+    }
+
+    private onMessageClose() {
+        if (typeof (this.returnToCaller) == "function") {
+            this.returnToCaller(this.returnType);
+        }
+    }
+}

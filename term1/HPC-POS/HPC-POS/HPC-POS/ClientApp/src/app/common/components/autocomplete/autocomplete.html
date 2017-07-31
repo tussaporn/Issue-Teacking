@@ -1,0 +1,47 @@
+﻿<div  class="input-group ctm-md2-autocomplete"
+      [ngClass]="_error.messageClass">
+  <input type="text"
+         class="form-control"
+         autocomplete="off"
+         placeholder="{{ placeHolder | translate: 'COMMON' }}"
+         tooltip-position="above"
+         [tooltip]="_error.message"
+         [tooltip-class]="_error.tooltipClass"
+         [ngClass]="_error.controlClass"
+         [(ngModel)]="_inputValue"  
+         [readonly]="readonly" 
+         [tabindex]="disabled ? -1 : tabindex" 
+         [disabled]="disabled" 
+         (focus)="_handleFocus()" 
+         (blur)="_handleBlur()" 
+         (keydown)="_handleKeydown($event)" 
+         (change)="$event.stopPropagation()" />
+  <div class="input-group-btn">
+    <button type="button" 
+            class="btn"
+            [ngClass]="{ 'btn-focused' : _inputFocused }"
+            (click)="_onButtonClick()"
+            [disabled]="disabled" >
+      <i class="fa fa-sort-desc"></i>
+    </button>
+  </div>
+</div>
+<div #divAutocomplete>
+  <ul *ngIf="isMenuVisible" 
+      class="md2-autocomplete-menu"
+      [ngStyle]="{ 'width': width + 'px', 'top': positionTop + 'px','left': positionLeft + 'px'}" 
+      (mouseenter)="_handleMouseEnter()" (mouseleave)="_handleMouseLeave()">
+    <li *ngIf="_isLoading" class="md2-loading">
+      <div id='circleG'>
+        <div id='circleG_1' class='circleG'></div>
+        <div id='circleG_2' class='circleG'></div>
+        <div id='circleG_3' class='circleG'></div>
+        <div id='circleG_4' class='circleG'></div>
+        <div id='circleG_5' class='circleG'></div>
+      </div>
+    </li>
+    <li class="md2-option" *ngFor="let l of _list; let i = index;" [class.focus]="_focusedOption === i" (click)="_selectOption($event, i)">
+      <div class="md2-text" [innerHtml]="l.text | highlight:_inputValue"></div>
+    </li>
+  </ul>
+</div>

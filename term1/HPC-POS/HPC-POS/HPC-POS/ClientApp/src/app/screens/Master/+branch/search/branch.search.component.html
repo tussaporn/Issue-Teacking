@@ -1,0 +1,68 @@
+﻿<ctm-screen-command></ctm-screen-command>
+ 
+<ctm-search-criteria [formGroup]="criteriaCtrlMgr.form"
+                     [use-search-command]="true"
+                     [use-clear-command]="true"
+                     (search-command)="onSearch()"
+                     (clear-command)="onClearSearch()">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-5 col-xl-2 form-group">
+            <label class="form-control-label">{{ "type" | translate: "MAS020" }}</label>
+            <md2-autocomplete autocomplete-key="BRAND"
+                              autocomplete-placeholder="SELECT"
+                              formControlName="BrandCode"
+                              (select)="onSelect()"></md2-autocomplete>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-7 col-xl-4 form-group">
+            <label class="form-control-label">{{ "branchName" | translate: "MAS020" }}</label>
+            <ctm-textbox formControlName="BranchName"></ctm-textbox>
+        </div>
+    </div>
+</ctm-search-criteria>
+<ctm-table class="table-user"
+    [table-data]="resultData">
+    <colgroup ctm-table-columns>
+        <col class="table-col-number">
+        <col class="table-col-delete">
+        <col class="table-col-lastupdate" style="width:200px">
+        <col class="table-col-name">
+        <col class="table-col-nickname">
+        <col class="table-col-lastupdate">
+        <col class="table-col-user-name">
+    </colgroup>
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center">{{ "tableNo" | translate: "COMMON" }}</th>
+            <th ></th>
+            <th class="align-center"  nowrap>{{ "typeName" | translate: "MAS020" }}</th>
+            <th class="align-center">{{ "branchName" | translate: "MAS020" }}</th>
+            <th class="align-center">{{ "price" | translate: "MAS020" }}</th>
+            <th class="align-center">{{ "lastupdate" | translate: "MAS020" }}</th>
+            <th class="align-center">{{ "updateUser" | translate: "MAS020" }}</th>
+        </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr *ngFor="let row of resultData.rows"> 
+            <td class="table-col-number">{{ row.rowNumber }}</td>
+            <td class="table-col-delete align-center" >
+               <a href *ngIf="hasPermissionDelete('MAS020')" (click)="onDeleteRow(row)" >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+               </a>
+            </td>
+            <td >
+               {{ row.BrandName }}
+            </td>
+            <td>
+                 <a *ngIf="hasPermissionOpen('MAS020')" (click)="onSelectRow(row)" href="#">
+                    <span >{{ row.BranchName }}</span>
+                </a>
+                <span *ngIf="!hasPermissionOpen('MAS020')">{{ row.BranchName }}</span>
+            </td>
+            <td class="align-right">{{ row.ServiceCharge*100 | ctmNumeric : {comma:true,scale:2,format:'{0}%'} }}</td>
+            <td class="align-center">{{ row.UpdateDate | ctmDate: "DD/MM/YYYY":"th" }}</td>
+            <td >
+               {{ row.UpdateUser }}
+            </td>
+        </tr>
+    </tbody>    
+</ctm-table>

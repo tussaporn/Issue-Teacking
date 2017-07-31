@@ -1,0 +1,243 @@
+@import "../../style/conf";
+
+.page-top {
+    background-color: $sidebar;
+    position: fixed;
+    z-index: 904;
+    box-shadow: 2px 0 3px rgba(0, 0, 0, 0.5);
+    height: $top-height-s;
+    width: 100%;
+    padding: 8px 16px;
+    border-bottom: solid 2px #333;
+
+    a.al-logo {
+        display: block;
+        outline: none !important;
+        font-family: $font-family;
+        color: $sidebar-text;
+        white-space: nowrap;
+
+        span {
+            display: block;
+            width: 100%;
+
+            &.logo-h {
+                font-size: 14px;
+            }
+
+            &.logo-d {
+                font-size: 12px;
+            }
+        }
+
+        &:hover {
+            text-decoration: none;
+            color: $warning;
+        }
+    }
+
+    a.collapse-menu-link {
+        position: absolute;
+        top: 45px;
+
+        font-size: 31px;
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        color: $sidebar-text;
+        padding: 0;
+        margin: 0;
+        float: left;
+        
+        &:hover {
+            text-decoration: none;
+            color: $warning;
+        }
+    }
+
+    .user-profile {
+        float: right;
+        min-width: 200px;
+        text-align: right;
+
+        .al-user-profile {
+            float: right;
+            transition: all .15s ease-in-out;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            opacity: 1;
+            position: relative;
+            
+            a {
+                display: block;
+
+                &.dropdown-toggle::after {
+                    display: none;
+                }
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background-color: transparent;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .top-dropdown-menu {
+                width: 316px;
+                left: auto;
+                right: -47px;
+                top: 26px;
+                @include scrollbars(.4em, rgba(0,0,0,0.5), #fff);
+
+                &.profile-dropdown {
+                    width: auto;
+                    min-width: 130px;
+                    top: 55px;
+                    right: -10px;
+
+                    .dropdown-item {
+                        padding: 3px 10px;
+
+                        &:hover {
+                            background: lighten($activelink, 10);
+                        }
+
+                        &.first {
+                            &:hover {
+                                background: transparent !important;
+                            }
+                        }
+
+                        a {
+                            text-align: left;
+                            border: none;
+                            text-decoration: none;
+                            color: $dropdown-text;
+                            padding: 4px 10px 4px 10px;
+
+                            i {
+                                margin-right: 10px;
+                            }
+
+                            &:hover {
+                                background: lighten($activelink, 10);
+                                color: #fff;
+                                cursor: pointer;
+                            }
+                        }
+
+                        &.language {
+                            margin-bottom: 5px;
+                            border-bottom: solid 1px rgba(0, 0, 0, 0.15);
+
+                            &:hover {
+                                background: transparent !important;
+                            }
+
+                            a {
+                                padding: 0;
+                                width: 28px;
+                                display: inline-block;
+
+                                img {
+                                    width: 24px;
+                                    height: 24px;
+                                    border-radius: 0;
+                                }
+
+                                &:hover {
+                                    background: transparent !important;
+                                }
+                            }
+                        }
+                    }
+
+                    
+
+                    i.dropdown-arr {
+                        right: 13px;
+                    }
+                }
+
+                i.dropdown-arr {
+                    position: absolute;
+                    top: -22px;
+                    right: 42px;
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border: 11px solid transparent;
+                    border-bottom-color: $input-border;
+
+                    &:after {
+                        top: -9px;
+                        left: 0px;
+                        margin-left: -10px;
+                        content: " ";
+                        position: absolute;
+                        display: block;
+                        width: 0;
+                        height: 0;
+                        border: 10px solid transparent;
+                        border-bottom-color: $input-background;
+                    }
+                }
+            }
+        }
+
+        .profile-name {
+            color: $sidebar-text;
+            font-size: 14px;
+            line-height: 30px;
+            padding-top: 8px;
+            padding-right: 40px;
+
+            img {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $resS) {
+    .page-top {
+        height: $top-height;
+
+        a.al-logo {
+            float: left;
+
+            span {
+                &.logo-h {
+                    font-size: 20px;
+                    line-height: 22px;
+                    padding-bottom: 5px;
+                }
+
+                &.logo-d {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        a.collapse-menu-link {
+            position: initial;
+            top: 0;
+
+            margin-top: 19px;
+            margin-right: 15px;
+            margin-left: -10px;
+        }
+
+        .user-profile {
+            min-width: 180px;
+            padding-top: 12px;
+        }
+    }
+}

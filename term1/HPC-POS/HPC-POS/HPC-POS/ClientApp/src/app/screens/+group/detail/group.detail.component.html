@@ -1,0 +1,175 @@
+﻿<ctm-screen-command></ctm-screen-command>
+<div class="row group-screen">
+    <div class="col-12">
+        <h4 class="group-header">{{"groupHeader" | translate: "SCS011" }}</h4>
+        <div [formGroup]="ctrlMgr.form" class="card card-search">
+            <div class="card-block">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div *ngIf="!screenParam.newData"
+                            class="row">
+                            <div class="col-sm-6 form-group">
+                                <label class="form-control-label">{{ "groupID" | translate: "SCS011" }}</label>
+                                <ctm-textbox formControlName="GroupID"></ctm-textbox>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="form-control-label">{{ "flagActive" | translate: "SCS011" }}</label>
+                                <md2-autocomplete autocomplete-key="ACTIVE_STATUS"
+                                                autocomplete-default-value="true"
+                                                formControlName="FlagActive"
+                                                [error]="ctrlMgr.error('FlagActive')"></md2-autocomplete>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label class="form-control-label" required>{{ "nameEN" | translate: "SCS011" }}</label>
+                                <ctm-textbox formControlName="NameEN"
+                                            [error]="ctrlMgr.error('NameEN')"
+                                #nameEN></ctm-textbox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label class="form-control-label" required>{{ "nameLC" | translate: "SCS011" }}</label>
+                                <ctm-textbox formControlName="NameLC"
+                                            [error]="ctrlMgr.error('NameLC')"
+                                ></ctm-textbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label class="form-control-label">{{ "description" | translate: "SCS011" }}</label>
+                                <ctm-textarea formControlName="Description"></ctm-textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 form-group">
+                                <label class="form-control-label" required>{{ "cashDiscount" | translate: "SCS011" }}</label>
+                                <ctm-numeric-textbox formControlName="CashDiscount"
+                                            suffix="%" precision="5" scale="2"
+                                            [error]="ctrlMgr.error('CashDiscount')"></ctm-numeric-textbox>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="form-control-label" required>{{ "creditDiscount" | translate: "SCS011" }}</label>
+                                <ctm-numeric-textbox formControlName="CreditDiscount"
+                                            suffix="%" precision="5" scale="2"
+                                            [error]="ctrlMgr.error('CreditDiscount')"></ctm-numeric-textbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row group-screen">
+    <div class="col-4">
+        <h4 class="group-header">{{"userInGroupHeader" | translate: "SCS011" }}</h4>
+        <div class="row no-gutters form-inline row-user-add"
+            [formGroup]="userCtrlMgr.form"
+            *ngIf="!controlDisabled">
+            <md2-autocomplete autocomplete-key="USER"
+                              autocomplete-placeholder="EMPTY"
+                              formControlName="UserName"
+                              class="col-10 pr-2" #userAdd></md2-autocomplete>
+            <button type="button" 
+                    class="col-2 btn btn-success btn-add-user"
+                    (click)="onAddUser()"
+                    [disabled]="userCtrlMgr.data.UserName == undefined">
+                <i class="ion-plus"></i>&nbsp;{{ "addButton" | translate: "COMMON" }}
+            </button>
+        </div>
+        <ctm-table
+            [show-information]="false"
+            [show-display-page]="false"
+            [show-pagging]="false"
+            [table-hover]="false"
+            [table-fixed-header]="true"
+            [table-data]="userData">
+            <colgroup ctm-table-columns>
+                <col class="table-col-number">
+                <col class="table-col-delete" *ngIf="!controlDisabled">
+                <col class="table-col-name">
+            </colgroup>
+            <thead ctm-table-header>
+                <tr class="black-muted-bg">
+                    <th class="align-center">{{ "tableNo" | translate: "COMMON" }}</th>
+                    <th *ngIf="!controlDisabled"></th>
+                    <th class="align-center">{{ "tableUserName" | translate: "SCS011" }}</th>
+                </tr>
+            </thead>
+            <tbody ctm-table-data>
+                <tr *ngFor="let row of userData.rows"> 
+                    <td class="table-col-number">{{ row.rowNumber }}</td>
+                    <td class="table-col-delete"
+                        *ngIf="!controlDisabled">
+                        <a href (click)="onDeleteUser(row)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>                 
+                    </td>
+                    <td>{{ userName(row) }}</td>
+                </tr>
+            </tbody>    
+        </ctm-table>
+    </div>
+    <div class="col-8">
+        <h4 class="group-header">{{"permissionHeader" | translate: "SCS011" }}</h4>
+        <div class="horizontal-scroll table-fixed-header table-permission-header"
+            *ngIf="fixedPermissionHeader">
+            <table class="table table-fixed table-bordered table-group-permission">
+            </table>
+        </div>
+        <div class="horizontal-scroll table-permission-main">
+            <table class="table table-fixed table-bordered table-group-permission">
+                <colgroup ctm-table-columns>
+                    <col class="table-col-screen">
+                    <col class="table-col-permission" *ngFor="let p of permissions">
+                </colgroup>
+                <thead ctm-table-header>
+                    <tr class="black-muted-bg">
+                        <th class="align-center" rowspan="2">{{ "tableScreenName" | translate: "COMMON" }}</th>
+                        <th class="align-center" [colSpan]="permissions.length">{{ "tablePermission" | translate: "SCS011" }}</th>
+                    </tr>
+                    <tr class="black-muted-bg">
+                        <th class="align-center" *ngFor="let p of permissions">{{ p.permissionName | translate: "COMMON" }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let grp of groupPermissions">
+                        <tr *ngIf="groupName(grp)" class="row-group">
+                            <td [colSpan]="permissions.length + 1" class="table-col-group">
+                                <i [ngClass]="grp.GroupImageIcon"></i>
+                                <span>{{ groupName(grp) }}</span>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let scn of grp.Screens"
+                            [ngClass]="{ 'row-child-group': groupName(grp) }">
+                            <td class="table-col-screen"
+                                [ngClass]="{ 'child-screen': scn.ParentScreenID }">
+                                <i [ngClass]="scn.ImageIcon"></i>
+                                <span>{{ screenName(scn) }}</span>
+                            </td>
+                            <td *ngFor="let p of permissions" class="align-center">
+                                <label *ngIf="scn[p.propSCN]" 
+                                    class="custom-control custom-checkbox"
+                                    [ngClass]="{ 'disabled': scn.ScreenID=='CMS020' || controlDisabled }">
+                                    <input type="checkbox" class="custom-control-input"
+                                           [disabled]="scn.ScreenID=='CMS020' || controlDisabled"
+                                           [(ngModel)]="scn[p.propROL]"
+                                           (change)="onPermissionChange(scn, p)">
+                                    <span class="custom-control-indicator"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr *ngIf="groupPermissions.length == 0" class="table-row-empty">
+                        <td [colSpan]="permissions.length + 1">{{ "tableDataInitialize" | translate: "SCS011" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

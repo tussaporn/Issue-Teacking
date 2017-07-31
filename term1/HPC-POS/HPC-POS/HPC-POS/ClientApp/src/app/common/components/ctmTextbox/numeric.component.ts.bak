@@ -1,0 +1,372 @@
+import {
+  AfterContentInit,
+  Component,
+  ViewEncapsulation,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+  forwardRef
+}                           from "@angular/core";
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR  
+}                           from "@angular/forms";
+
+import {
+  textNumeric
+}                           from "../../base";
+import { 
+  ResponseMessage
+}                           from "../../models";
+
+
+export const CTM_NUMERIC_CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => CtmNumericTextbox),
+  multi: true
+};
+
+@Component({
+  selector: "ctm-numeric-textbox",
+  templateUrl: "numeric.component.html",
+  providers: [CTM_NUMERIC_CONTROL_VALUE_ACCESSOR],
+  host: {   
+  },
+  encapsulation: ViewEncapsulation.None
+})
+export class CtmNumericTextbox implements ControlValueAccessor {
+
+  constructor(
+      private _element: ElementRef
+  ) { 
+
+  }
+
+  private _value: number;
+  private _valueText: string = "";
+
+  private _readonly: boolean = false;
+  private _disabled: boolean = false;
+  private _error: ResponseMessage = new ResponseMessage();
+  
+  _onChange = (value: any) => { };
+  _onTouched = () => { };
+
+  @Input()
+  tabindex: number = 0;
+  @Input() 
+  placeholder: string = null;
+  @Input("minlength") 
+  minLength: number = 0;
+  @Input("maxlength")
+  maxLength: number = 100;
+  @Input("precision")
+  precision: number = 18;
+  @Input("scale")
+  scale: number = 0;
+  @Input("minus")
+  minus: boolean = false;
+  @Input("comma")
+  comma: boolean = true;
+  @Input("default-value")
+  defaultValue: number = null;
+  @Input("suffix")
+  suffix: string = null;
+  @Input("max")
+  max: number = null;
+  @Input("min")
+  min: number = null;
+
+  @Input()
+  get readonly(): boolean { 
+      return this._readonly; 
+  }
+  set readonly(value) { 
+      this._readonly = value; 
+  }
+
+  @Input()
+  get disabled(): boolean { 
+      return this._disabled;
+  }
+  set disabled(value) { 
+      this._disabled = value;
+  }
+
+  @Input()
+  get error(): ResponseMessage { 
+      return this._error; 
+  }
+  set error(value) {
+    if (value != undefined) {
+      if (typeof(value) == "string") {
+        this._error = new ResponseMessage();
+        this._error.type = "error";
+        this._error.message = value;
+      }
+      else {
+        this._error = value;
+      } 
+    }
+  }
+
+  @Input()
+  get value(): number { 
+    return this._value; 
+  }
+  set value(value: number)  {
+    this._value = value;    
+    this._onChange(value);
+  }
+
+  private get valueText(): string {
+    return this._valueText;
+  }
+  private set valueText(value: string) {
+    this._valueText = value;
+  }
+
+  writeValue(value: any): void {
+    if (value !== this._value) {
+      this._value = value;
+      this.setNumericText(this._value);
+    }
+  }
+
+  registerOnChange(fn: (value: any) => void): void { this._onChange = fn; }
+  registerOnTouched(fn: () => {}): void { this._onTouched = fn; }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  public focus() {
+    this._element.nativeElement.querySelector('input').focus();
+  }
+
+  private onKeypress(event) {
+    if (event.keyCode == 13) {
+      let number = this.numericValue();
+      this._valueText = textNumeric(number);
+      this.value = number;
+      return false;
+    }
+    else {
+      var pidx = 0;
+      var sidx = 0;
+      var sel = this.getInputTextSelection(event.target);
+      if (sel != undefined) {
+        pidx = sel.start;
+        sidx = sel.end;
+      }
+      else {
+        if (document["selection"].type != "None") {
+          var stxt = document["selection"].createRange().text;
+            pidx = this._valueText.indexOf(stxt);
+            sidx = pidx + stxt.length;
+        }
+        else {
+          pidx = this._valueText.length;
+          sidx = pidx;
+        }
+      }
+
+      var prefix = this._valueText.substring(0, pidx);
+      var suffix = this._valueText.substring(sidx);
+
+      let txt = String.fromCharCode(event.keyCode);
+      if (txt != "." 
+          && txt != "-" 
+          && isNaN(parseInt(txt)) == true) {
+        return false;
+      }
+      if (txt == "."
+          && this._valueText.indexOf(".") >= 0) {
+            return false;        
+      }
+
+      let minus = 0;
+      if (txt == "-") {
+        if (this.minus == false) {
+          return false;
+        }
+        minus = 1;
+      }
+
+      let num = prefix + txt + suffix;
+      if (this.minus == true) {
+        let countm = 0;
+        let cidx = -1;
+        for(let i = 0; i < num.length; i++) {
+            if (num[i] == "-") {
+              cidx = i;
+              countm++;
+            }
+        }
+        if (cidx > 0
+            || countm > 1) {
+              return false;
+        }
+      }
+      
+      var idx = num.indexOf(".");
+      if (idx >= 0) {
+        var dNum = num.substring(idx + 1);
+        if (dNum.length > this.scale + minus)
+          return false;
+
+        var pNum = num.substring(0, idx);
+        if (pNum.length > (this.precision - this.scale) + minus) {
+          return false;
+        }
+      }
+      else {
+        if (num.length > (this.precision - this.scale) + minus) {
+          return false;
+        }
+      }
+
+      let rnum: number;
+      if (this.scale == 0) {
+        rnum = parseInt(num);
+      }
+      else {
+        rnum = parseFloat(num);
+      }
+      if (this.min != undefined) {
+        if (rnum < this.min) {
+          return false;
+        }
+      }
+      if (this.max != undefined) {
+        if (rnum > this.max) {
+          return false;
+        }
+      }
+    }
+  }
+  private onChange() {
+    this._error = new ResponseMessage();
+  }
+  private onFocus() {
+    if (this._disabled == false
+        && this._readonly == false
+        && this._valueText != undefined) {
+      this._valueText = this._valueText.replace(/ /g, "").replace(/,/g, "");
+
+      let input = this._element.nativeElement.querySelector('input');
+      setTimeout(function() {
+        input.select();
+      }, 0);
+    }
+  }
+  private onBlur() {
+    let number = this.numericValue();
+    this.setNumericText(number);
+    this.value = number;
+
+    this._onTouched();
+  } 
+
+  
+
+  private numericValue(): number {
+    let number = this._valueText;
+    if (number == undefined || number == "") {
+      number = number.replace(/ /g, "").replace(/,/g, "");
+    }
+
+    let rnum: number;
+    if (this.scale == 0) {
+      rnum = parseInt(number);
+    }
+    else {
+      rnum = parseFloat(number);
+    }
+    
+    if (isNaN(rnum)) {
+      if (this.defaultValue != undefined) {
+        rnum = this.defaultValue;
+      }
+      else {
+        rnum = null;
+      }
+    }
+    if (rnum < 0
+        && this.minus != true) {
+      rnum = null;
+    }
+
+    if (this.min != undefined) {
+      if (rnum < this.min) {
+        rnum = null;
+      }
+    }
+    if (this.max != undefined) {
+      if (rnum > this.max) {
+        rnum = null;
+      }
+    }
+
+    return rnum;
+  }
+  private setNumericText(number: number) {
+    if (number != null) {
+      this._valueText = textNumeric(number, {
+                        precision: this.precision,
+                        scale: this.scale,
+                        comma: this.comma
+                    });
+    }
+    else {
+      this._valueText = "";  
+    }
+  }
+  private getInputTextSelection (el) {
+    var start = 0, end = 0, normalizedValue, range,
+        textInputRange, len, endRange;
+
+    if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+        start = el.selectionStart;
+        end = el.selectionEnd;
+    } else {
+      range = document["selection"].createRange();
+
+      if (range && range.parentElement() == el) {
+        len = el.value.length;
+        normalizedValue = el.value.replace(/\r\n/g, "\n");
+
+        // Create a working TextRange that lives only in the input
+        textInputRange = el.createTextRange();
+        textInputRange.moveToBookmark(range.getBookmark());
+
+        // Check if the start and end of the selection are at the very end
+        // of the input, since moveStart/moveEnd doesn't return what we want
+        // in those cases
+        endRange = el.createTextRange();
+        endRange.collapse(false);
+
+        if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+          start = end = len;
+        } else {
+          start = -textInputRange.moveStart("character", -len);
+          start += normalizedValue.slice(0, start).split("\n").length - 1;
+
+          if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+            end = len;
+          } else {
+            end = -textInputRange.moveEnd("character", -len);
+            end += normalizedValue.slice(0, end).split("\n").length - 1;
+          }
+        }
+      }
+    }
+
+    return {
+      start: start,
+      end: end
+    };
+  }
+}

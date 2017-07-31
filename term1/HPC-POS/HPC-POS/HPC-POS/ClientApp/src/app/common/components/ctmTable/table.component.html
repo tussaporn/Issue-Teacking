@@ -1,0 +1,91 @@
+<div class="row table-navigate"
+    *ngIf="showInformation == true || showDisplayPage == true || (showPagging == true && tableData.totalRecords > 0)">
+    <div *ngIf="showInformation == true || showDisplayPage == true"
+         class="col-sm-12 col-md-6">
+        <div class="table-information form-inline">
+            <md2-autocomplete *ngIf="showDisplayPage == true"
+                              autocomplete-key="DISPLAY_PAGE"
+                              autocomplete-placeholder="EMPTY"
+                              autocomplete-default-value="20"
+                              class="mr-2"
+                              [(ngModel)]="tableData.displayPage"
+                              [disabled]="tableData.totalRecords == 0"
+                              (change)="_onDisplayPageChange($event)"></md2-autocomplete>
+            <label *ngIf="showInformation == true">{{ _tableInformation() }}</label>
+        </div>
+    </div>
+    <div *ngIf="showPagging == true && tableData.totalRecords > 0"
+         class="col-sm-12 col-md-6 table-pagging">
+        <div class="btn-toolbar">
+            <div *ngIf="tableData.pagging.first.show" class="btn-group btn-f">
+                <button type="button" 
+                        class="btn btn-primary"
+                        (click)="_onPageChange(tableData.pagging.first.f)">
+                    <i class="fa fa-fast-backward"></i>
+                </button>
+            </div>
+            <div *ngIf="tableData.pagging.first.show" class="btn-group">
+                <button type="button" 
+                        class="btn btn-primary"
+                        (click)="_onPageChange(tableData.pagging.first.ff)">
+                    <i class="fa fa-backward"></i>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button *ngFor="let page of tableData.pagging.ranges" 
+                        type="button" 
+                        class="btn btn-primary"
+                        [ngClass]="{ 'active': page.current }"
+                        (click)="_onPageChange(page)">{{ page.numberText }}</button>
+            </div>
+            <div *ngIf="tableData.pagging.last.show" class="btn-group">
+                <button type="button" 
+                        class="btn btn-primary"
+                        (click)="_onPageChange(tableData.pagging.last.nn)">
+                    <i class="fa fa-forward"></i>
+                </button>
+            </div>
+            <div *ngIf="tableData.pagging.last.show" class="btn-group btn-n">
+                <button type="button" 
+                        class="btn btn-primary"
+                        (click)="_onPageChange(tableData.pagging.last.n)">
+                    <i class="fa fa-fast-forward"></i>
+                </button>                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="horizontal-scroll table-fixed-header"
+     *ngIf="_fixedHeader">
+    <table class="table table-fixed table-bordered">
+    </table>
+</div>
+<div class="horizontal-scroll table-main">
+    <table class="table table-fixed table-bordered"
+        [ngClass]="{'table-hover': tableHover, 'table-striped': tableStriped }">
+        <ng-content select="[ctm-table-columns]"></ng-content>
+        <ng-content select="[ctm-table-header]"></ng-content>
+        <tbody *ngIf="tableData.loading && tableData.totalRecords == 0">
+            <tr class="table-row-loading">
+                <td [colSpan]="tableData.totalColumns">
+                    <div id='circleG'>
+                        <div id='circleG_1' class='circleG'></div>
+                        <div id='circleG_2' class='circleG'></div>
+                        <div id='circleG_3' class='circleG'></div>
+                        <div id='circleG_4' class='circleG'></div>
+                        <div id='circleG_5' class='circleG'></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="tableData.totalRecords == 0 && tableData.loading == false">
+            <tr class="table-row-empty">
+                <td [colSpan]="tableData.totalColumns">
+                    &nbsp;<span *ngIf="tableData.loaded">{{ "tableDataNotFound" | translate: "COMMON" }}</span>&nbsp;
+                </td>
+            </tr>            
+        </tbody>
+        <ng-content select="[ctm-table-data]"></ng-content>
+        <ng-content select="[ctm-table-footer]"></ng-content>
+    </table>
+</div>

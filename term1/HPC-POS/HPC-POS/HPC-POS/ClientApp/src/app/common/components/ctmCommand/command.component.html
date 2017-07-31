@@ -1,0 +1,53 @@
+<div *ngIf="hasCommandEvent || useCustomCommand" 
+     class="navbar navbar-light navbar-command">
+    <div class="form-inline">
+        <div class="input-group mr-auto mb-2">
+            <button class="btn btn-command btn-success"
+                    *ngIf="useExportCommand"
+                    [disabled]="exportCommandDisabled"
+                    (click)="onExportClick()">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <span>{{ "exportButton" | translate: "COMMON" }}</span>
+            </button>
+            <button class="btn btn-command btn-success mr-2"
+                *ngIf="useAddCommand"
+                [disabled]="addCommandDisabled" 
+                (click)="onAddClick()">
+                <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
+                <span>{{ "addButton" | translate: "COMMON" }}</span>
+            </button>
+            <button class="btn btn-command btn-primary mr-2"
+                    *ngIf="useEditCommand"
+                    [disabled]="editCommandDisabled" 
+                    (click)="onEditClick()">
+                    <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
+                    <span>{{ "editButton" | translate: "COMMON" }}</span>
+            </button>
+            <button class="btn btn-command btn-danger"
+                    *ngIf="useDeleteCommand"
+                    [disabled]="deleteCommandDisabled" 
+                    (click)="onDeleteClick()">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span>{{ "deleteButton" | translate: "COMMON" }}</span>
+            </button>
+        </div>
+        <ng-content></ng-content>
+        <div class="input-group ml-auto mb-2"
+             *ngIf="useUpdateCommand || useCancelCommand">
+             <button class="btn btn-command btn-success mr-2"
+                *ngIf="useUpdateCommand" 
+                [disabled]="updateCommandDisabled"
+                (click)="onUpdateClick()">
+                <i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>
+                <span>{{ "saveButton" | translate: "COMMON" }}</span>
+            </button>
+            <button class="btn btn-command btn-danger"
+                *ngIf="useCancelCommand"
+                [disabled]="cancelCommandDisabled" 
+                (click)="onCancelClick()">
+                <i class="fa fa-undo fa-fw" aria-hidden="true"></i>
+                <span>{{ "cancelButton" | translate: "COMMON" }}</span>
+            </button>
+        </div>
+    </div>    
+</div>

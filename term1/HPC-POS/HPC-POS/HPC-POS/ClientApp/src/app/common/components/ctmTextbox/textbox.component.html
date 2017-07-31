@@ -1,0 +1,18 @@
+<div  [ngClass]="_error.messageClass">
+    <input  type="{{textType}}"
+            class="form-control"
+            autocomplete="off"
+            tooltip-position="above"
+            [tooltip]="_error.message"
+            [tooltip-class]="_error.tooltipClass"
+            [ngClass]="_error.controlClass"
+            [(ngModel)]="value"  
+            [readonly]="readonly" 
+            [tabindex]="disabled ? -1 : tabindex" 
+            [disabled]="disabled" 
+            [minlength]="minLength"
+            [maxlength]="maxLength"
+            (change)="onChange()"
+            (focus)="onFocus()"
+            (blur)="onBlur()" />
+</div>

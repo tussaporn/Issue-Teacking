@@ -1,0 +1,67 @@
+﻿<ctm-screen-command></ctm-screen-command>
+<ctm-search-criteria [formGroup]="criteriaCtrlMgr.form"
+                     [use-search-command]="true"
+                     [use-clear-command]="true"
+                     (search-command)="onSearch()"
+                     (clear-command)="onClearSearch()">
+    <div class="row">
+        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 form-group">
+            <label class="form-control-label">{{ "userName" | translate: "SCS020" }}</label>
+            <ctm-textbox formControlName="UserName"></ctm-textbox>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "groupID" | translate: "SCS020" }}</label>
+            <md2-autocomplete autocomplete-key="GROUP"
+                              autocomplete-placeholder="ALL"
+                              formControlName="GroupID"></md2-autocomplete>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 form-group">
+            <label class="form-control-label">{{ "flagActive" | translate: "SCS020" }}</label>
+            <md2-autocomplete autocomplete-key="ACTIVE_STATUS"
+                              autocomplete-placeholder="ALL"
+                              formControlName="FlagActive"></md2-autocomplete>
+        </div>
+    </div>
+</ctm-search-criteria>
+<ctm-table class="table-user"
+    [table-data]="resultData">
+    <colgroup ctm-table-columns>
+        <col class="table-col-number">
+        <col class="table-col-group-name">
+        <col class="table-col-user-name">
+        <col class="table-col-name">
+        <col class="table-col-nickname">
+        <col class="table-col-lastupdate">
+        <col class="table-col-flag">
+    </colgroup>
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center">{{ "tableNo" | translate: "COMMON" }}</th>
+            <th class="align-center">{{ "tableGroupName" | translate: "SCS020" }}</th>
+            <th class="align-center">{{ "tableUserName" | translate: "SCS020" }}</th>
+            <th class="align-center">{{ "tableName" | translate: "SCS020" }}</th>
+            <th class="align-center">{{ "tableNickName" | translate: "SCS020" }}</th>
+            <th class="align-center">{{ "tableLastUpate" | translate: "SCS020" }}</th>
+            <th class="align-center">{{ "tableFlagActive" | translate: "SCS020" }}</th>
+        </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr *ngFor="let row of resultData.rows"> 
+            <td class="table-col-number">{{ row.rowNumber }}</td>
+            <td>{{ groupName(row) }}</td>
+            <td class="align-center">
+                <a href *ngIf="hasPermissionOpen('SCS020')"
+                        class="table-link" 
+                        (click)="onSelectRow(row)">{{ row.UserName }}</a>
+                <span *ngIf="!hasPermissionOpen('SCS020')">{{ row.UserName }}</span>
+            </td>
+            <td>{{ row.Name }}</td>
+            <td>{{ row.NickName }}</td>
+            <td class="align-center">{{ row.LastLoginDate | ctmDate: "DD/MM/YYYY" }}</td>
+            <td class="table-col-flag"
+                [ngClass]="{'active': row.FlagActive }">
+                <i class="fa fa-circle" aria-hidden="true"></i>
+            </td>
+        </tr>
+    </tbody>    
+</ctm-table>

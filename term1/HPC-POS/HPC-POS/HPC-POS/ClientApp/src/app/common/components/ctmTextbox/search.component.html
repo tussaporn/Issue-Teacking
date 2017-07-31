@@ -1,0 +1,28 @@
+<div class="input-group search-textbox"
+     [ngClass]="_error.messageClass">
+    <input  type="text"
+            class="form-control"
+            autocomplete="off"
+            tooltip-position="above"
+            [tooltip]="_error.message"
+            [tooltip-class]="_error.tooltipClass"
+            [ngClass]="_error.controlClass"
+            [(ngModel)]="value"  
+            [readonly]="readonly" 
+            [tabindex]="disabled ? -1 : tabindex" 
+            [disabled]="disabled" 
+            [minlength]="minLength"
+            [maxlength]="maxLength"
+            (keypress)="onKeypress($event)"
+            (change)="onChange()"
+            (focus)="onFocus()"
+            (blur)="onBlur()" />
+    <div class="input-group-btn">
+        <button type="button" 
+                class="btn"
+                [ngClass]="{ 'btn-focused' : _inputFocused }"
+                (click)="onSearch()">
+            <i class="ion-search"></i>&nbsp;{{ "searchButton" | translate: "COMMON" }}
+        </button>
+    </div>
+</div>

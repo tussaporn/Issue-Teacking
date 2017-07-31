@@ -1,0 +1,270 @@
+import {
+    convertBoolean,
+    convertNumber
+}                                   from "../base";
+import { 
+    AutocompleteData,
+    AutoCompleteServer,
+    AAutoCompleteCriteria 
+}                                   from "./autocomplete.data";
+import { CtmTranslateService }      from "../services";
+
+export class TheatreSubAutoCompleteCriteria 
+                extends AAutoCompleteCriteria {
+    public TheatreID: number;
+    
+    public get criteriaKey(): string {
+        let key = "";
+        if (this.TheatreID != undefined) {
+            key = this.TheatreID.toString();
+        }
+
+        return key;
+    }
+}
+export class TheatreSystemAutoCompleteCriteria 
+                extends AAutoCompleteCriteria {
+    public TheatreID: number;
+    public TheatreSubID: number;
+
+    public get criteriaKey(): string {
+        let key = "";
+        if (this.TheatreID != undefined) {
+            key = this.TheatreID.toString();
+
+            if (this.TheatreSubID != undefined) {
+                key = ":" + this.TheatreSubID.toString();
+            }
+        }
+
+        return key;
+    }
+}
+
+export const AUTOCOMPLETE_CACHE = {
+    "GROUP": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetUserGroupAutoComplete",
+                    alwayLoad: true
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "GroupID"),
+    "USER": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetUserAutoComplete"
+                }),
+                "Name",
+                "UserName"),
+    "ACTIVE_STATUS": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetConstantAutoComplete",
+                    data: { ConstantCode: "ACTIVE_STATUS" }
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "ConstantValue",
+                function(val1, val2) {
+                  return convertBoolean(val1) == convertBoolean(val2);
+                },
+                function (val) {
+                    return convertBoolean(val);
+                }),
+    "DISPLAY_PAGE": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetConstantAutoComplete",
+                    data: { ConstantCode: "DISPLAY_PAGE" }
+                }),
+                "NameEN",
+                "ConstantValue",
+                function(val1, val2) {
+                  return convertNumber(val1) == convertNumber(val2);
+                },
+                function (val) {
+                    return convertNumber(val);
+                }),
+    "USER_PASSWORD_AGES": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetConstantAutoComplete",
+                    data: { ConstantCode: "USER_PASSWORD_AGES" }
+                }),
+                "NameEN",
+                "ConstantValue",
+                function(val1, val2) {
+                  return convertNumber(val1) == convertNumber(val2);
+                },
+                function (val) {
+                    return convertNumber(val);
+                }),
+    "CHECKER_LEVEL": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetConstantAutoComplete",
+                    data: { ConstantCode: "CHECKER_LEVEL" }
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "ConstantValue",
+                function(val1, val2) {
+                  return convertNumber(val1) == convertNumber(val2);
+                },
+                function (val) {
+                    return convertNumber(val);
+                }),
+
+    
+
+    "THEATRE_SUB": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetTheatreSubAutoComplete"
+                }),
+                "Name",
+                "TheatreSubID",
+                function(val1, val2) {
+                  return convertNumber(val1) == convertNumber(val2);
+                },
+                function (val) {
+                    return convertNumber(val);
+                }), 
+    "SYSTEM_TYPE_BY_THEATRE": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetSystemTypeByTheatreAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "SystemTypeID",
+                function(val1, val2) {
+                  return convertNumber(val1) == convertNumber(val2);
+                },
+                function (val) {
+                    return convertNumber(val);
+                }),
+    "MOVIE_TYPE": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieTypeAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "MovieTypeID"),
+    "MOVIE_STATUS": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieStatusAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "StatusID"),
+    "MOVIE_DITRIBUTOR": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieDistributorAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "DistributorID"),
+    "MOVIE_GENRE": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieGenreAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "GenreID"),
+    "MOVIE_NATIONALITY": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieNationalityAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "NationalityID"),
+    "MOVIE_PATTERN": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMoviePatternAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "PatternID"),
+    "MOVIE_STUDIO": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieStudioAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "StudioID"),
+    "MOVIE_APPEAR_STATUS": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Master/GetMovieAppearStatusAutoComplete"
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "AppearStatusID"),
+    "RPT012_GROUP_BY": new AutocompleteData(
+                new AutoCompleteServer({
+                    url: "api/Common/GetConstantAutoComplete",
+                    data: { ConstantCode: "RPT012_GROUP_BY" }
+                }),
+                (translate: CtmTranslateService, data)=> { 
+                    if (translate.isLanguageEN == true) {
+                        return data["NameEN"];
+                    }
+                    
+                    return data["NameLC"];
+                },
+                "ConstantValue"),
+};

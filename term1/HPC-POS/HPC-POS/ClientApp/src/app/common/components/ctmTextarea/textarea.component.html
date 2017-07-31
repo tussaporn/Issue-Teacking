@@ -1,0 +1,19 @@
+<div  [ngClass]="_error.messageClass">
+    <textarea
+            class="form-control"
+            autocomplete="off"
+            tooltip-position="above"
+            [tooltip]="_error.message"
+            [tooltip-class]="_error.tooltipClass"
+            [ngClass]="[textareaRows,_error.controlClass]"
+            [(ngModel)]="value"  
+            [readonly]="readonly" 
+            [tabindex]="disabled ? -1 : tabindex" 
+            [disabled]="disabled" 
+            [minlength]="minLength"
+            [maxlength]="maxLength"
+            (change)="_onChangeEvent()"
+            (focus)="onFocus()"
+            (blur)="_onBlurEvent()">
+    </textarea>
+</div>

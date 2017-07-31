@@ -1,0 +1,22 @@
+<div class="input-group"
+     [ngClass]="_error.messageClass">
+    <input  type="text"
+            class="form-control numeric-control"
+            autocomplete="off"
+            tooltip-position="above"
+            [tooltip]="_error.message"
+            [tooltip-class]="_error.tooltipClass"
+            [ngClass]="_error.controlClass"
+            [(ngModel)]="valueText"  
+            [readonly]="readonly" 
+            [tabindex]="disabled ? -1 : tabindex" 
+            [disabled]="disabled" 
+            [minlength]="minLength"
+            [maxlength]="maxLength"
+            (keypress)="onKeypress($event)"
+            (change)="onChange()"
+            (focus)="onFocus()"
+            (blur)="onBlur()" />
+    <span class="input-group-addon suffix"
+        *ngIf="suffix">{{suffix}}</span>
+</div>

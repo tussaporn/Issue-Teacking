@@ -1,0 +1,75 @@
+﻿<!--<ul>
+    <li *ngFor="let l of lists">{{l.MSTNameLC}}</li>
+
+</ul>-->
+<div class="col-sm-12-md-12-lg-12">
+    <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3" >
+        
+                        <ctm-screen-command *ngIf="hasPermissionOpen('MAS010')"></ctm-screen-command>
+                       
+    </div>
+</div>
+
+
+
+<div class="col-sm-12-md-12-lg-12">
+     <div class="col-sm-6-md-6-lg-6">
+         <div class = "row" [formGroup]="criteriaCtrlMgr.form">
+            <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "userID" | translate: "SCS010" }}</label>
+            <md2-autocomplete autocomplete-key="SMALL_MASTER"
+                              autocomplete-placeholder="SELECT"
+                              formControlName="MSTCode"
+                              (select)="onSearch()" 
+                              ></md2-autocomplete>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<div>
+
+
+<ctm-table
+    [table-data]="resultData">
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center">{{ "tableNo" | translate: "Master" }}</th>
+            <th class="align-center">{{ "ValueCode" | translate: "Master" }}</th>
+            <th class="align-center" *ngIf="hasPermissionOpen('MAS010')"></th>
+            <th class="align-center">{{ "Description" | translate: "Master" }}</th>
+            <th class="align-center">{{ note.Value1Description }}</th>
+            <th class="align-center">{{ note.Value2Description }}</th>
+            <th class="align-center">{{ note.Value3Description }}</th>
+            <th class="align-center">{{ "FlagDefault" | translate: "Master" }}</th>
+        </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr *ngFor="let row of resultData.rows"> 
+            <td class="table-col-number">{{ row.rowNumber }}</td>
+            <td class="align-center">
+                <a href *ngIf="hasPermissionOpen('MAS010')"
+                        class="table-link" 
+                        (click)="onSelectRow(row)">{{ row.ValueCode }}</a>
+                <span *ngIf="!hasPermissionOpen('MAS010')">{{ row.ValueCode }}</span>
+            </td>
+            <!--<td>{{ row.ValueCode }}</td>-->
+            <td class="align-center" *ngIf="hasPermissionOpen('MAS010')"> 
+          <a href (click)="onDelete(row)"><img src="..\..\assets\img\app\icon\delete-icon.png"></a>
+        
+        </td>
+            <td>{{ row.Description }}</td>
+            <td>{{ row.Value1 }}</td>
+            <td>{{ row.Value2 }}</td>
+            <td>{{ row.Value3 }}</td>
+        
+            <td *ngIf="!row.FlagDefault">  </td>
+            <td *ngIf="row.FlagDefault">  </td>
+
+            
+        </tr>
+    </tbody>    
+</ctm-table></div>

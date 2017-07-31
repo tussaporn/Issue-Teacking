@@ -1,0 +1,20 @@
+<div class="card card-search">
+    <div class="card-block">
+        <div class="serch-header">
+            <h4><i class="ion-ios-search-strong"></i>&nbsp;{{ "searchCriteria" | translate: "COMMON" }}</h4>
+        </div>
+        <ng-content></ng-content>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col">
+                <button *ngIf="useSearchCommand"
+                        class="btn btn-command btn-primary" (click)="onSearchClick()">
+                <i class="fa fa-search fa-fw" aria-hidden="true"></i>{{ "searchButton" | translate: "COMMON" }}</button>
+                <button *ngIf="useClearCommand" 
+                        class="btn btn-command btn-warning" (click)="onClearClick()">
+                <i class="fa fa-undo fa-fw" aria-hidden="true"></i>{{ "clearButton" | translate: "COMMON" }}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@import "../../../common/style/conf";
+
+.table-col-group-id {
+    width: 80px;
+}
+.table-col-group-name,
+.table-col-description {
+    width: 265px;
+}
+
+@media screen and (min-width: 1200px) {
+    .table-col-group-name,
+    .table-col-description {
+        width: auto;
+    }
+}

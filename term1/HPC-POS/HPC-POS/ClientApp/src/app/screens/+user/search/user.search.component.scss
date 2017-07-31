@@ -1,0 +1,27 @@
+﻿@import "../../../common/style/conf";
+
+.table-user {
+    .table-col-user-name {
+        width: 120px;
+    }
+    .table-col-name,
+    .table-col-group-name {
+        width: 265px;
+    }
+    .table-col-nickname {
+        width: 120px;
+    }
+    .table-col-lastupdate {
+        width: 150px;
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .table-user {
+        .table-col-name,
+        .table-col-group-name {
+            width: auto;
+        }
+    }
+}

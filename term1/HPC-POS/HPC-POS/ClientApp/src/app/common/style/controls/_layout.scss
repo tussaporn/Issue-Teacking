@@ -1,0 +1,112 @@
+$left-space: $sidebar-width;
+
+main {
+  min-height: 100%;
+  position: relative;
+  font: 14px/16px $font-family;
+  color: $default-text;
+
+  @include body-bg();
+}
+
+.al-main {
+    padding: $top-height-s 0 34px 0;
+    min-height: 100%;
+    position: relative;
+
+    .al-content {
+        padding: 8px 16px;
+    }
+}
+.al-footer {
+    position: fixed;
+    left: 8px;
+    right: 8px; 
+    bottom: 4px;
+    text-align: right;
+}
+
+@media screen and (min-width: $resS) {
+    .al-main {
+        padding-top: $top-height;
+    }
+}
+@media (min-width: $resS + 1) {
+    .al-main {
+        margin-left: 35px;
+    }
+}
+@media (min-width: 1200px) {
+    .al-main {
+        margin-left: $left-space;
+    }
+}
+
+.content-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $body-bg;
+    z-index: 100;
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1003;
+    }
+
+    .spin {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1004;
+
+        & > div {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: $danger;
+            transform: translate3d(0, 0, 0);
+            animation: api-spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+            &:before {
+                content: "";
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                bottom: 5px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: $primary;
+                -webkit-animation: api-spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+                animation: api-spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: $warning;
+                animation: api-spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+            }
+        }
+    }
+}

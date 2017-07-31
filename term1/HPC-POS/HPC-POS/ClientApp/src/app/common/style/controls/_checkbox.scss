@@ -1,0 +1,16 @@
+.custom-control-description {
+    line-height: 24px;
+}
+
+.custom-control-input:checked 
+    ~ .custom-control-indicator {
+    background-color: #0a9ee2;
+}
+.custom-control-input:checked[disabled] 
+    ~ .custom-control-indicator {
+    background-color: $input-disabled;
+}
+.custom-control-input:disabled 
+    ~ .custom-control-description {
+    cursor: initial;
+}

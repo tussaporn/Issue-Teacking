@@ -1,0 +1,153 @@
+﻿@import "../../../common/style/conf";
+
+.selected-theatre {
+    .thratre-list-selected,
+    .thratre-list {
+        margin-top: 20px;
+
+        .theatre {
+            .input-group {
+                margin-bottom: 8px;
+
+                .input-group-addon {
+                    width: 100%;
+                    word-wrap: normal;
+                    white-space: normal;
+                    text-align: left;
+                    height: 40px;
+                    background-color: #fff;
+
+                    &.disabled {
+                        cursor: inherit !important;
+                    }
+                }
+                .custom-checkbox {
+                    .custom-control-indicator {
+                        left: 8px;
+                        top: auto;
+                    }
+                    .custom-control-description {
+                        padding-left: 18px;
+                        line-height: 16px;
+                    }
+                    .custom-control-input:disabled ~ .custom-control-description {
+                        cursor: inherit;
+                    }
+
+                    .custom-control-input:checked ~ .custom-control-indicator {
+                        background-color: #0a9ee2;
+                    }
+                    .custom-control-input:checked[disabled] ~ .custom-control-indicator {
+                        background-color: $input-disabled;
+                    }
+                }
+            }
+
+            &.selected {
+                .input-group-addon {
+                    border-color: $warning;
+                    background-color: $warning-light;
+                }
+            }
+        }
+    }
+    .thratre-list-selected + .theatre-edit {
+        margin-top: 20px;
+    }
+    .theatre-edit {
+        .filter-header {
+            label {
+                font-size: 1.2em;
+                font-weight: $font-bold;
+            }
+        }
+    }
+}
+
+.row-permission {
+    .table {
+        &.table-group-permission {
+            & > colgroup {
+                col {
+                    &.table-col-screen {
+                        width: 287px;
+                    }
+                    &.table-col-permission {
+                        width: 60px;
+                    }
+                }
+            }
+            & > tbody {
+                    & > tr {
+                        & > td {
+                            &.table-col-group,
+                            &.table-col-screen {
+                                //i {
+                                //    position: absolute;
+                                //}
+                                span {
+                                    padding-left: 5px;
+                                }
+                            }
+                            
+                            .custom-control {
+                                display: inline;
+                                padding-left: 1rem;
+                                margin-right: 0;
+                                min-height: 17px;
+                                
+                                &.disabled {
+                                    cursor: inherit;
+                                }
+
+                                .custom-control-indicator {
+                                    top: 1px;
+                                }
+                                .custom-control-input:checked ~ .custom-control-indicator {
+                                    background-color: #0a9ee2;
+                                }
+                                .custom-control-input:checked[disabled] ~ .custom-control-indicator {
+                                    background-color: $input-disabled;
+                                }
+
+                                
+                            }
+                        }
+
+                        & > td {
+                            &.table-col-screen {
+                                &.child-screen {
+                                    padding-left: 30px;
+                                }
+                            }
+                        }
+                        &.row-child-group {
+                            & > td {
+                                &.table-col-screen {
+                                    padding-left: 30px;
+
+                                    &.child-screen {
+                                        padding-left: 50px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .table {
+            &.table-group-permission {
+                & > colgroup {
+                    col {
+                        &.table-col-screen {
+                            width: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

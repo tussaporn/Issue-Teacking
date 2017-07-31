@@ -1,0 +1,69 @@
+﻿<h1>Group Detail</h1>
+
+<div class="col-xl-4 offset-xl-4">
+    <div class="card">
+<div class="card-header clearfix" >
+
+    <h4 class="card-title">New Position</h4>
+</div>
+<div class="card-block from-group">
+
+     <div class="row col-xl-8 offset-xl-2" > 
+            <div class="form-group col-xl-12">
+                <label class="form-control-label"> Position Name</label>
+                <ctm-textbox  
+                             [maxlength]="100"></ctm-textbox>
+            </div>
+     </div>
+     <div  class="row col-xl-6 offset-xl-3" align="center">
+           
+           <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input">
+             <span class="custom-control-description"> Active </span>
+            <span class="custom-control-indicator"></span>   
+            </label>    
+    </div>
+
+
+</div>
+<div class="card-footer">
+    <div  class="row">
+        <div class="col-xl-5 offset-xl-7" align="right">
+            <button class="btn btn-success"> Save </button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<ctm-table
+    [table-data]="resultData">
+    <!-- <colgroup ctm-table-columns>
+        <col class="table-col-number">
+        <col class="table-col-delete">
+        <col class="table-col-group-id">
+        <col class="table-col-group-name">
+        <col class="table-col-description">
+        <col class="table-col-flag">
+    </colgroup> -->
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center">No.</th>            
+            <th class="align-center">Name</th>
+            <th class="align-center">Now Position</th>
+            <th class="align-center">New Position</th>
+            <th class="align-center">Action</th>
+        </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr> 
+            <td class="table-col-number">1</td>
+            <td class="align-left">บาสไง บาสเอง</td>
+            <td class="align-left">PG</td>
+            <td class="align-left">Manager</td>
+            <th class="align-center">
+                <button class="btn btn-warning">Cancel</button>
+                <button class="btn btn-success">OK</button>
+            </th>
+        </tr>
+    </tbody>    
+</ctm-table>

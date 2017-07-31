@@ -1,0 +1,172 @@
+﻿<ctm-screen-command></ctm-screen-command>
+<div class="row" [formGroup]="ctrlMgr.form">
+    <div class="col-12 col-xl-8">
+
+    <!-- ======================== Begin Row MemberTypeName ======================== -->
+        <div class="row">
+            <div class="col-6 form-group">
+                <label class="form-control-label" required>{{ "memberTypeName" | translate: "MAS031" }}</label>
+                <ctm-textbox formControlName="MemberTypeName"
+                             [maxlength]="50"></ctm-textbox>
+            </div>
+        </div>
+    <!-- ======================== End Row MemberTypeName ======================== -->
+
+
+    <!-- ======================== Begin Row Remark ======================== -->
+        <div class="row"> 
+            <div class="col-6 form-group">
+                <label class="form-control-label">{{ "remark" | translate: "MAS031" }}</label>
+                <ctm-textarea [maxlength]="255"
+                              formControlName="Remark"></ctm-textarea>
+            </div>
+        </div><br>
+    <!--======================== End Row Remark ======================== -->
+
+    <!-- ======================== Begin Panel of Discount ======================== -->
+        <div class="row">
+            <!-- ===== Begin Panel of Cash Discount ===== -->
+            <div class="card-group col-xl-6">
+                <div class="form-group">
+                    <div class="card-title">
+                        {{ "cash" | translate: "MAS031" }}
+                    </div>
+                <!--Begin Body panel of Cash discount -->
+                    <div [formGroup]="ctrlMgr.form" class="card card-search">
+                        <div class="row card-block" > 
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-gutter">                            
+                                <label class="form-control-label" required>{{ "discountValue" | translate: "MAS031" }}</label>
+                                <ctm-numeric-textbox formControlName="CashDiscountValue"
+                                             precision="5" scale="2"></ctm-numeric-textbox>   
+                                                                                            
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-gutter">
+                                <label class="form-control-label" required>{{ "discountType" | translate: "MAS031" }}</label>
+                                <md2-autocomplete autocomplete-key="CashDiscount_Type"
+                                    autocomplete-default-value="true"
+                                    formControlName="CashDiscountType"></md2-autocomplete>
+                            </div>
+                        </div>
+                    </div>
+                     <!--End Body panel of Cash discount -->
+                </div>
+            </div>
+        <!-- ===== End Panel of Cash Discount ===== -->
+    
+        <!-- ===== Begin Panel of Credit Discount ===== -->
+            <div class="card-group col-xl-6">
+                <div class="form-group">
+                    <div  class="card-title">
+                        {{ "creditCard" | translate: "MAS031" }}
+                    </div>
+                <!--Begin Body Panel of Credit Discount -->
+                    <div [formGroup]="ctrlMgr.form" class="card card-search">
+                        <div class="row card-block" > 
+                            <div class="col-sm-7 col-md-7 col-lg-7 col-gutter">                              
+                                <label class="form-control-label" required>{{ "discountValue" | translate: "MAS031" }}</label>
+                                <ctm-numeric-textbox formControlName="CreditDiscountValue"
+                                             precision="5" scale="2"></ctm-numeric-textbox>                                                     
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-lg-5 col-gutter">
+                                <label class="form-control-label" required>{{ "discountType" | translate: "MAS031" }}</label>
+                                <md2-autocomplete autocomplete-key="CreditDiscount_Type"
+                                    autocomplete-default-value="true"
+                                    formControlName="CreditDiscountType"></md2-autocomplete>
+                            </div>
+                        </div>
+                    </div>
+                <!--End Body Panel of Credit Discount -->
+                </div>
+            </div>
+        <!-- ===== End Panel of Credit Discount ===== -->
+        </div>
+    <!--======================== End Panel of Discount ======================== -->
+
+
+
+    <!-- ======================== Begin Panel of LifeTimeMember ======================== -->
+         <div class="row">
+            <div class="card-group col-xl-12">
+                <div class="form-group col-xl-12" style="padding-left: 0px; padding-right: 0px;"> 
+                    <div  class="card-title">
+                        {{ "lifeTime" | translate: "MAS031" }}
+                    </div>
+                <!--Begin Body panel of LifeTimeMember -->
+                    <div [formGroup]="ctrlMgr.form" class="card card-search">
+                        <div class="row card-block" > 
+                            <div class="col-sm-4 col-md-4 col-xl-4 col-gutter">                            
+                                <label class="form-control-label" required>{{ "lifeTimeType" | translate: "MAS031" }}</label>
+                                <md2-autocomplete autocomplete-key="MemberLifeType"
+                                    autocomplete-default-value="true"
+                                    (select)="onSelectLifetime()"
+                                    formControlName="MemberLifeType"></md2-autocomplete>                                                  
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-xl-4 col-gutter" *ngIf="flagDay">
+                                <label class="form-control-label" required>{{ "startPeriod" | translate: "MAS031" }}</label>
+                                <md2-datepicker locale="th"
+                                   formControlName="StartPeriod"></md2-datepicker>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-xl-4 col-gutter" *ngIf="flagDay">
+                                <label class="form-control-label" required>{{ "endPeriod" | translate: "MAS031" }}</label>
+                                <md2-datepicker locale="th"
+                                   formControlName="EndPeriod"></md2-datepicker>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-xl-4 col-gutter" *ngIf="flagMonth">
+                                <label class="form-control-label" required>{{ "endPeriod" | translate: "MAS031" }}</label>
+                                <ctm-numeric-textbox formControlName="Lifetime" precision="2"></ctm-numeric-textbox> 
+                            </div>
+                        </div>
+                    </div>
+                     <!--End Body panel of LifeTimeMember -->
+                </div>
+            </div>
+        </div>
+    <!-- ======================== End Panel of LifeTimeMember ======================== -->
+
+
+
+    <!-- ======================== Begin Panel of BrandList ======================== -->
+        <div class="row">            
+            <div class="card-group col-xl-12">
+                <div class="col-xl-12 form-group" style="padding-left: 0px; padding-right: 0px;">
+                    <div  class="card-title" >
+                        {{ "brandList" | translate: "MAS031" }}
+                    </div>
+                <!--Begin Body panel of BrandList -->
+                    <div [formGroup]="ctrlMgr.form" class="card card-search">
+                        <div class="row card-block" > 
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-gutter">                            
+                                <div class="input-group">
+                                    <label class="custom-control custom-checkbox">                                        
+                                            
+                                     <input type="checkbox" class="custom-control-input" [(checked)]="HPC"  formControlName="HPC_chk">
+                                    หัวปลาช่องนนทรี 
+                                    <span class="custom-control-indicator"></span>
+                                    </label>
+                                    <label class="custom-control custom-checkbox">
+                                     <input type="checkbox" class="custom-control-input"  [(checked)]="HPCJ" formControlName="HPCJ_chk" >
+                                    หัวปลาช่องนนทรีจูเนียร์
+                                    <span class="custom-control-indicator"></span>
+                                         </label>
+                                    <label class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" [(checked)]="PPY" formControlName="PPY_chk"> 
+                                    ปาปาย่า ป๊อกป๊อก
+                                    <span class="custom-control-indicator"></span> 
+                                    </label>
+                                </div>                                                 
+                            </div>
+                            
+                        </div>
+                    </div>
+                     <!--End Body panel of BrandList -->
+                </div>
+            </div>
+    <!-- ======================== End Panel of BrandList ======================== -->
+        </div>
+        
+        
+       
+        
+    </div>
+     
+</div>

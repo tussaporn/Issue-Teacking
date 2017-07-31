@@ -1,0 +1,73 @@
+﻿<ctm-screen-command></ctm-screen-command>
+<ctm-search-criteria [formGroup]="criteriaCtrlMgr.form"
+                     [use-search-command]="true"
+                     [use-clear-command]="true"
+                     (search-command)="onSearch()"
+                     (clear-command)="onClearSearch()">
+    <div class="row">
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "groupName" | translate: "SCS010" }}</label>
+            <ctm-textbox formControlName="GroupName"></ctm-textbox>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "description" | translate: "SCS010" }}</label>
+            <ctm-textbox formControlName="Description"></ctm-textbox>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "userID" | translate: "SCS010" }}</label>
+            <md2-autocomplete autocomplete-key="USER"
+                              autocomplete-placeholder="ALL"
+                              formControlName="UserName"></md2-autocomplete>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 form-group">
+            <label class="form-control-label">{{ "flagActive" | translate: "SCS010" }}</label>
+            <md2-autocomplete autocomplete-key="ACTIVE_STATUS"
+                              autocomplete-placeholder="ALL"
+                              formControlName="FlagActive"></md2-autocomplete>
+        </div>
+    </div>
+</ctm-search-criteria>
+<ctm-table
+    [table-data]="resultData">
+    <colgroup ctm-table-columns>
+        <col class="table-col-number">
+        <col class="table-col-delete">
+        <col class="table-col-group-id">
+        <col class="table-col-group-name">
+        <col class="table-col-description">
+        <col class="table-col-flag">
+    </colgroup>
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center">{{ "tableNo" | translate: "COMMON" }}</th>
+            <th></th>
+            <th class="align-center">{{ "tableGroupID" | translate: "SCS010" }}</th>
+            <th class="align-center">{{ "tableGroupName" | translate: "SCS010" }}</th>
+            <th class="align-center">{{ "tableDescription" | translate: "SCS010" }}</th>
+            <th class="align-center">{{ "tableFlagActive" | translate: "SCS010" }}</th>
+        </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr *ngFor="let row of resultData.rows"> 
+            <td class="table-col-number">{{ row.rowNumber }}</td>
+            <td class="table-col-delete">
+                <a href *ngIf="!row.FlagSystemAdmin && hasPermissionDelete('SCS010') && !isCurrentGroup(row)"
+                        (click)="onDeleteRow(row)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>                 
+            </td>
+            <td>
+                <a href *ngIf="hasPermissionOpen('SCS010')"
+                        class="table-link" 
+                        (click)="onSelectRow(row)">{{ row.GroupID }}</a>
+                <span *ngIf="!hasPermissionOpen('SCS010')">{{ row.GroupID }}</span>
+            </td>
+            <td>{{ groupName(row) }}</td>
+            <td>{{ row.Description }}</td>
+            <td class="table-col-flag"
+                [ngClass]="{'active': row.FlagActive }">
+                <i class="fa fa-circle" aria-hidden="true"></i>
+            </td>
+        </tr>
+    </tbody>    
+</ctm-table>

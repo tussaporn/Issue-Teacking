@@ -1,0 +1,26 @@
+.card {
+    @include scrollbars(.4em, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.7));
+    border: 0;
+    position: relative;
+    box-shadow: 0.2px 0.2px 4px rgba(0, 0, 0, 0.2);
+    
+    margin-bottom: 20px;
+    
+    .card-block {
+        padding: 6px 15px;
+    }
+    .card-footer {
+        border-bottom: 1px solid $border-light;
+        padding: 5px 15px;
+        text-align: right;
+
+        .btn {
+            width: 100px;
+            height: 37px;
+        }
+        .btn + .btn {
+            margin-left: 5px;
+        }
+    }
+}
+

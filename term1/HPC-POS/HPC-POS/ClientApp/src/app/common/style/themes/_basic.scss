@@ -1,0 +1,77 @@
+$default: #333; // default colors for layout
+$body-bg: #f0f0f0; // default bg color
+
+$default-text: $default; // default text color layout (usually is the same as $default)
+$content-text: $default-text; // content text color on card, panels, form, etc
+$help-text: $default-text; // additional text color for hits
+
+$label-text: $default-text; // labels color
+$disabled: rgba(51, 51, 51, 0.4); // color for disabled state
+$disabled-bg: tint($disabled, 15%); // background color for disable state
+$border: rgba(51, 51, 51, 0.5); // border color
+$border-light: rgba(51, 51, 51, 0.3); // lighter version of border color (for hovers)
+$input-border: rgba(51, 51, 51, 0.6); // input border color
+$input-background: #fff; // input border color for hover
+$input-disabled: #dc770b;
+$input-disabled-bg: #f9f9f9;
+$input-disabled-border:rgba(51, 51, 51, 0.4);
+$dropdown-text: #7d7d7d; // dropdown text color
+
+// color scheme
+$primary: #286090 !default;
+$info: #40daf1 !default;
+$success: #449d44 !default;
+$warning: #f0ad4e !default;
+$danger: #c9302c !default;
+
+$primary-light: tint($primary, 30%);
+$info-light: tint($info, 30%);
+$success-light: tint($success, 30%);
+$warning-light: tint($warning, 30%);
+$danger-light: tint($danger, 30%);
+
+$primary-dark: shade($primary, 15%);
+$info-dark: shade($info, 15%);
+$success-dark: shade($success, 15%);
+$warning-dark: shade($warning, 15%);
+$danger-dark: shade($danger, 15%);
+
+$primary-bg: tint($primary, 20%);
+$info-bg: tint($info, 20%);
+$success-bg: tint($success, 20%);
+$warning-bg: tint($warning, 20%);
+$danger-bg: tint($danger, 20%);
+
+// link colors
+$activelink: #285eb8;
+$hoverlink: darken($activelink, 20%);
+
+// sidebar colors
+$sidebar: #006bb3 ;
+$sidebar-overlap: rgba(#006bb3, 0.75);
+$sidebar-text: #ffffff;
+
+// Table
+$table-striped-row-odd: #fff;
+$table-striped-row-even: #f7f7f7;
+$table-striped-row-hover:#81D4FA;
+$table-background: rgba(51, 51, 51, 0.7);
+$table-border: #DFDFDF;
+$table-footer-background: rgba(51, 51, 51, 0.5);
+
+// main background
+@mixin body-bg() {
+    background-color: $body-bg;
+    
+    &::before {
+        content: '';
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        will-change: transform;
+        z-index: 0;
+    }
+}

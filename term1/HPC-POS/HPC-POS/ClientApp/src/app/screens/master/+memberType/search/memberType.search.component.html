@@ -1,0 +1,114 @@
+﻿<ctm-screen-command></ctm-screen-command>
+<ctm-search-criteria [formGroup]="criteriaCtrlMgr.form"
+                     [use-search-command]="true"
+                     [use-clear-command]="true"
+                     (search-command)="onSearch()"
+                     (clear-command)="onClearSearch()">
+    <div class="row">
+        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 form-group">
+            <label class="form-control-label">{{ "memberTypeName" | translate: "MAS030" }}</label>
+            <ctm-textbox formControlName="MemberTypeName"></ctm-textbox>
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3 form-group">
+            <label class="form-control-label">{{ "discountValue" | translate: "MAS030" }}</label>
+            <md2-autocomplete autocomplete-key="Discount_Value"
+                              autocomplete-placeholder="ALL"
+                              formControlName="DiscountValue"></md2-autocomplete>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 form-group">
+            <label class="form-control-label">{{ "discountType" | translate: "MAS030" }}</label>
+            <md2-autocomplete autocomplete-key="Discount_Type"
+                              autocomplete-placeholder="ALL"
+                              formControlName="ValueCode"></md2-autocomplete>
+        </div>
+    </div>
+</ctm-search-criteria>
+<ctm-table 
+    [table-data]="resultData">
+    <colgroup ctm-table-columns>
+        <col class="table-col-number">
+        <col class="table-col-delete">
+        <col class="table-col-brand-list">
+        <col class="table-col-brand-list">
+        <col class="table-col-brand-list">
+        <col class="table-col-member-type-name">
+        <col class="table-col-discount">
+        <col class="table-col-discount">
+        <col class="table-col-date">
+        <col class="table-col-by">
+        <col class="table-col-date">
+        <col class="table-col-by">
+    </colgroup>
+    <thead ctm-table-header>
+        <tr class="black-muted-bg">
+            <th class="align-center" rowspan="2">{{ "tableNo" | translate: "MAS030" }}</th>
+            <th rowspan="2" *ngIf="hasPermissionDelete('MAS030')"></th>
+            <th class="align-center" colspan="3">{{ "brandList" | translate: "MAS030" }}</th>
+            <th class="align-center" rowspan="2">{{ "memberTypeName" | translate: "MAS030" }}</th>
+            <th class="align-center" colspan="2">{{ "discountValue" | translate: "MAS030" }}</th>
+            
+            <th class="align-center" rowspan="2">{{ "updateDate" | translate: "MAS030" }}</th>
+            <th class="align-center" rowspan="2">{{ "updateUser" | translate: "MAS030" }}</th>
+            <th class="align-center" rowspan="2">{{ "createDate" | translate: "MAS030" }}</th>
+            <th class="align-center" rowspan="2">{{ "createUser" | translate: "MAS030" }}</th>
+
+            
+        </tr>
+        <tr>
+            <th class="align-center">HPC</th>
+            <th class="align-center">HPCJ</th>
+            <th class="align-center">PPY</th>
+            <th class="align-center">{{ "cashDiscount" | translate: "MAS030" }}</th>
+            <th class="align-center">{{ "creditDiscount" | translate: "MAS030" }}</th>
+            </tr>
+    </thead>
+    <tbody ctm-table-data>
+        <tr *ngFor="let row of resultData.rows; let i = index;"> 
+            <td class="table-col-number">{{ row.rowNumber }}</td>
+            <td class="table-col-delete" *ngIf="hasPermissionDelete('MAS030')"> 
+          <a href  (click)="onDeleteRow(row)">
+              <img src="..\..\assets\img\app\icon\delete-icon.png"></a>
+        
+         </td>
+            <td>
+               <div class="col-xl-6 form-group">
+                   <label class="custom-control custom-checkbox">
+                   <input type="checkbox" class="custom-control-input" [disabled]="true" [(ngModel)]="HPC[i]">
+                   <span class="custom-control-indicator"></span>
+                                      </label>
+               </div>
+           </td>
+
+            <td>
+               <div class="col-xl-6 form-group">
+                   <label class="custom-control custom-checkbox">
+                                         <input type="checkbox" class="custom-control-input" [disabled]="true" [(ngModel)]="HPCJ[i]">
+                                          <span class="custom-control-indicator"></span>
+                                      </label>
+               </div>
+           </td>
+           <td>
+               <div class="col-xl-6 form-group">
+                   <label class="custom-control custom-checkbox">
+                                         <input type="checkbox" class="custom-control-input" [disabled]="true" [(ngModel)]="PPY[i]">
+                                          <span class="custom-control-indicator"></span>
+                                      </label>
+               </div>
+           </td>  
+
+            <td class="table-col-member-type-name align-left ">
+                <a href *ngIf="hasPermissionOpen('MAS030')"
+                        class="table-link" 
+                        (click)="onSelectRow(row)">{{ row.MemberTypeName }}</a>
+                <span *ngIf="!hasPermissionOpen('MAS030')">{{ row.MemberTypeName }}</span>
+            </td>
+            <td class="table-col-discount align-right">{{ row.CashDiscountValue | ctmNumeric : {comma:true,scale:2} }}%</td>
+            <td class="table-col-discount align-right">{{ row.CreditDiscountValue | ctmNumeric : {comma:true,scale:2,format:'{0} บาท'} }}</td>
+            <td class="table-col-date align-center">{{ row.UpdateDate | ctmDate: "DD/MM/YYYY" :"th" }}</td>
+            <td class="table-col-by align-left">{{ row.UpdateUser }}</td>
+            <td class="table-col-date align-center">{{ row.CreateDate | ctmDate: "DD/MM/YYYY" :"th"}}</td>
+            <td class="table-col-by align-left">{{ row.CreateUser }}</td>
+           
+        </tr>
+    </tbody>    
+</ctm-table>

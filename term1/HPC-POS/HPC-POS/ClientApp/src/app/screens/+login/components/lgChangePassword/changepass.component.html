@@ -1,0 +1,43 @@
+<md2-dialog dialog-class="changepass-dialog"
+            [formGroup]="ctrlMgr.form"
+            #changeDlg>
+    <div class="row">
+        <div class="col-sm-12 form-group">
+            <label class="form-control-label">{{ "username" | translate: "CMS010" }}</label>
+            <ctm-textbox 
+                formControlName="Username"></ctm-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 form-group">
+            <label class="form-control-label" required>{{ "oldPassword" | translate: "CMS010" }}</label>
+            <ctm-textbox type="password"
+                         formControlName="OldPassword"
+                         maxlength="15"
+                         [error]="ctrlMgr.error('OldPassword')"
+                         #oldPassword></ctm-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 form-group">
+            <label class="form-control-label" required>{{ "newPassword" | translate: "CMS010" }}</label>
+            <ctm-textbox type="password"
+                         formControlName="NewPassword"
+                         maxlength="15"
+                         [error]="ctrlMgr.error('NewPassword')"></ctm-textbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 form-group">
+            <label class="form-control-label" required>{{ "confirmPassword" | translate: "CMS010" }}</label>
+            <ctm-textbox type="password"
+                         formControlName="ConfirmPassword"
+                         maxlength="15"
+                         [error]="ctrlMgr.error('ConfirmPassword')"></ctm-textbox>
+        </div>
+    </div>
+    <md2-dialog-footer>
+        <button type="button" class="btn btn-success" 
+                (click)="onChangePass()">{{ "updateButton" | translate: "COMMON" }}</button>
+    </md2-dialog-footer>
+</md2-dialog>

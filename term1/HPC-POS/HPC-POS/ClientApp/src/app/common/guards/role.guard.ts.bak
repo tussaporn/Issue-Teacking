@@ -1,0 +1,156 @@
+﻿import { Injectable }                   from "@angular/core";
+import { 
+    Router, 
+    CanActivateChild, 
+    ActivatedRouteSnapshot, 
+    RouterStateSnapshot 
+}                                       from "@angular/router";
+import { 
+    Http, 
+    Headers, 
+    RequestOptions, 
+    Response 
+}                                       from "@angular/http";
+
+import { SERVER_PATH }                  from "../common.constant";
+import { ROLE_PERMISSION }              from "../common.permission";
+import {
+    CtmTranslateService,
+    CtmMessageService
+}                                       from "../services";
+
+export class RoleData {
+    public permissions: Array<RoleScreenPermissionData>;
+
+    constructor(permissions) {
+        this.permissions = [];
+        if (permissions == undefined) {
+            return;
+        }
+
+        for (let ipx = 0; ipx < permissions.length; ipx++) {
+            let p = permissions[ipx];
+            let rsp = new RoleScreenPermissionData();
+            rsp.screenID = p.screenID;
+
+            rsp.permissions = [];
+            if (p.permissions != undefined) {
+                for (let i = 0; i < p.permissions.length; i++) {
+                    rsp.permissions.push(new RolePermissionData(p.permissions[i]));
+                }  
+            }
+
+            this.permissions.push(rsp);
+        }
+    } 
+
+    public hasPermission(p: ROLE_PERMISSION): boolean {
+        return $.grep(this.permissions, function (val) {
+            return $.grep(val.permissions, function(sval) {
+                    return sval.permissionID == p && sval.hasPermission == true;
+                }).length > 0;
+        }).length > 0;
+    } 
+    public hasScreenPermission(s: string, p: ROLE_PERMISSION): boolean {
+        return $.grep(this.permissions, function (val) {
+            if (val.screenID == s) {
+                return $.grep(val.permissions, function(sval) {
+                    return sval.permissionID == p && sval.hasPermission == true;
+                }).length > 0;
+            }
+
+            return false;
+        }).length > 0;
+    }
+}
+export class RoleScreenPermissionData {
+    public screenID: string;
+    public permissions: Array<RolePermissionData>;
+}
+export class RolePermissionData {
+    public permissionID: ROLE_PERMISSION;
+    public hasPermission: boolean;
+
+    constructor(permissionID: ROLE_PERMISSION) {
+        this.permissionID = permissionID;
+    }
+}
+
+@Injectable()
+export class RoleGuard implements CanActivateChild {
+    constructor(
+        private http: Http,
+        private router: Router,
+
+        private message: CtmMessageService,
+        private translate: CtmTranslateService        
+    ) {
+    }
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        let role = route.data["role"] as RoleData;
+        if (role == undefined) {
+            return true;
+        }
+
+        let headers = new Headers({
+            "Content-Type": "application/json; charset=UTF-8"
+        });
+        let options = new RequestOptions({
+            "headers": headers
+        });
+        return this.http.post(SERVER_PATH + "api/Common/IsUserInRole",
+            JSON.stringify(role), options)
+            .toPromise()
+            .then((res: Response) => {
+                let result = res.json();
+                if (result.Data == undefined) {
+                    this.message.openMessageDialog(
+                        this.translate.instant("CLE003", "MESSAGE"))
+                        .then(() => {
+                            this.router.navigate(["/login"]);
+                        });
+                        
+                    return false;
+                }
+
+                let srole = route.data["role"] as RoleData;                
+                for (let i = 0; i < srole.permissions.length; i++) {
+                    let ps = result.Data["permissions"];
+                    if (ps != undefined) {
+                        for (let j = 0; j < srole.permissions[i].permissions.length; j++) {
+                            srole.permissions[i].permissions[j].hasPermission = ps[i]["permissions"][j]["hasPermission"];
+                        } 
+                    }
+                }
+
+                if (srole.permissions[0].screenID == "CMS020") {
+                    return true;
+                }
+                
+                if (srole.hasScreenPermission(srole.permissions[0].screenID, ROLE_PERMISSION.OPEN) == false) {
+                    if (srole.permissions[0].screenID == "BOX010") {
+                        this.router.navigate(["/login"]);
+                    }
+                    else {
+                        this.message.openMessageDialog(
+                            this.translate.instant("CLE003", "MESSAGE"))
+                            .then(() => {
+                                this.router.navigate(["/"]);
+                            });
+                    }
+
+                    return false;
+                }
+
+                return true;
+            })
+            .catch((error: Response) => {
+                this.message.openMessageDialog(
+                    this.translate.instant("CLE003", "MESSAGE"))
+                    .then(() => {
+                            this.router.navigate(["/login"]);
+                        });
+            });
+    }
+}

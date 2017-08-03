@@ -80,7 +80,7 @@ export class AdminSettingGroupDetailComponent extends ABaseComponent {
             }
         );
 
-        this.resultData = new CtmTableData(table, 7, "api/SCS020/GetUserList");
+        this.resultData = new CtmTableData(table, 5, "api/SCS020/GetUserList");
     }
 
     get screenCommand() { return this.commandCtrl; }

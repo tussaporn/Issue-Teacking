@@ -86,4 +86,7 @@ export class BaPageTop {
 
     return false;
   }
+  private onShowUserInfo(){
+    this.router.navigate(["/s/userinfo"]);
+  }
 }

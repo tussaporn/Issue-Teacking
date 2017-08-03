@@ -1,0 +1,86 @@
+﻿
+<div class="container-fluid">
+    <div class="card">
+    <div class="card-block">
+        <div class="card-title">
+                    <h1>Issue
+                <div class="pull-right">
+                    <button (click)="NewIssue()" class="btn btn-primary">Create Issue</button>
+                </div></h1>
+        </div><!-- end card title  -->
+        <div class="mx-auto">
+        <ctm-table 
+            [table-data]="resultData"> 
+            <!-- <colgroup ctm-table-columns>
+                <col class="table-col-number">
+                <col class="table-col-delete">
+                <col class="table-col-group-id">
+                <col class="table-col-group-name">
+                <col class="table-col-description">
+                <col class="table-col-flag">
+            </colgroup> -->
+            <thead ctm-table-header>
+                <tr class="black-muted-bg" >
+                    <th class="align-center" style="width:5%">No.</th>            
+                    <th class="align-center" style="width:10%">REF No.</th>
+                    <th class="align-center" style="width:40%">Title</th>
+                    <th class="align-center" style="width:5%">Priority</th>
+                    <th class="align-center" style="width:10%">Status</th>
+                    <th class="align-center" style="width:10%">Finish Date</th>
+                    <th class="align-center" style="width:20%">Action</th>
+                </tr>
+            </thead>
+            <tbody ctm-table-data>
+                <tr> 
+                    <td class="table-col-number" style="width:5%">1</td>
+                    <td class="align-left" style="width:10%">AA00-001</td>
+                    <td class="align-left" style="width:50%">แก้ไขหน้าจอ เนื่องจากพิมพ์อักษรไม่ครบ</td>
+                    <td class="align-left" style="width:5%">D</td>
+                    <td class="align-left" style="width:10%">Open</td>
+                    <td class="align-left" style="width:10%">12/08/2017</td>
+                    <th class="align-center"  style="width:20%" nowrap>
+                        <button (click)="ClickModal('D')" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Next Phase</button>
+                        <button (click)="ClickDetails()" class="btn btn-warning">Details</button>
+                    </th>
+                </tr>
+            </tbody>    
+        </ctm-table>
+        </div>
+       
+    </div> <!-- end card block -->
+    </div> <!-- end card -->
+</div> <!-- end container -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+        <div class="modal-header">
+            <h2 class="modal-title" id="exampleModalLabel" align="center">Are you want to change status?</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" >
+            <div class="container-fluid">
+            <h4>
+                <div class="row">
+                    <span class="col-xl-6" align="right">From : </span>
+                    <span class="from_status col-xl-1" >xx</span>
+                </div>
+            </h4>
+            <h4>
+                <div class="row">
+                    <span class="col-xl-6" align="right">To : </span>
+                    <span class="to_status col-xl-1" >xx</span>
+                </div>
+            </h4>
+            </div><!-- end container fluid -->
+        </div> <!-- end modal body -->
+        <div class="modal-footer claerfix">
+                <button type="button" class="btn btn-secondary  mr-auto" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary " >Save changes</button>
+        </div>
+        </div>
+  </div>
+</div>

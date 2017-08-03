@@ -15,8 +15,8 @@
     "CLI001": "กรุณากรอกเงื่อนไขในการค้นหา"
   },
   "COMMON": {
-    "companyName": "หัวปลาช่องนนทรี",
-    "systemName": "POS MANAGEMENT SYSTEM",
+    "companyName": "C.S.I. Group",
+    "systemName": "Issue Tracking System",
     "logout": "ออกจากระบบ",
     "home": "หน้าหลัก",
     "searchCriteria": "เงื่อนไขในการค้นหา",
@@ -50,7 +50,8 @@
     "tablePermissionImport": "ข้อมูลเข้า",
     "tablePermissionExport": "ข้อมูลออก",
     "adminButton":  "ไปหน้า Admin",
-    "checkerButton": "ไปหน้า Checker"
+    "checkerButton": "ไปหน้า Checker",
+    "actionButton": "แอ็คชั่น"
   },
   "CMS010": {
     "loginHeader": "กรุณาเข้าสู่ระบบ",
@@ -112,45 +113,59 @@
     "remark": "หมายเหตุ",
     "telNo": "เบอร์โทรศัพท์"
   },
-  "Master": {
-    "ValueCode": "รหัส",
-    "Description": "รายละเอียด",
-    "Value1": "ค่า1",
-    "Value2": "ค่า2",
-    "Value3": "ค่า3",
-    "FlagDefault": "ค่าเริ่มต้น"
-    
+  "MAS001":{
+    "notation" : "หมายเหตุ",
+    "type" : "ประเภท",
+    "ValueCode" : "โค้ด",
+    "Description" : "รายละเอียด",
+    "value1" : "ค่า 1",
+    "value2" : "ค่า 2",
+    "value3" : "ค่า 3",
+    "other" : "ค่าเริ่มต้น"
   },
-  "MAS030": {
-    "brandList": "รายชื่อประเภทธุรกิจ",
-    "memberTypeName": "ประเภทสมาชิก",
-    "tableNo": "ลำดับที่",
-    "cashDiscount": "เงินสด",
-    "creditDiscount": "บัตรเครดิต",
-    "updateDate": "แก้ไขข้อมูลล่าสุด",
-    "updateUser": "แก้ไขข้อมูลล่าสุดโดย",
-    "createDate": "สร้าง",
-    "createUser": "สร้างโดย",
-    "discountValue": "มูลค่าส่วนลด",
-    "discountType" : "ชนิดการลด"
-    
+  "MAS020":{
+    "type":"ประเภทธุรกิจ",
+    "branchName":"ชื่อสาขา",
+    "typeName":"ชื่อประเภทธุรกิจ",
+    "price":"ค่าบริการ",
+    "lastupdate":"แก้ไขล่าสุด",
+    "updateUser":"แก้ไขโดย"
   },
-  "MAS031": {
-    "memberInf" : "ข้อมูลประเภทสมาชิก",
-    "remark":"ข้อมูลเพิ่มเติม",
-    "memberTypeName": "ประเภทสมาชิก",
-    "cash": "เงินสด",
-    "discountValue": "ส่วนลด",
-    "discountType":"ชนิดการลด",
-    "creditCard":"บัตรเครดิต",
-    "lifeTime":"อายุสมาชิก",
-    "lifeTimeType":"ประเภทอายุสมาชิก",
-    "brandList": "ประเภทธุรกิจ",
-    "select":"เลือก",
-    "startPeriod":"เริ่มทำงาน",
-    "endPeriod":"ถึง",
-    "month":"เดือน"
-
-
+  "MAS021":{
+    "Type":"ประเภทธุรกิจ",
+    "BranchCode":"รหัสสาขา",
+    "BranchName":"สาขา",
+    "BranchShortEN":"ชื่อสั้นสาขา (อังกฤษ)",
+    "BranchShortTH":"ชื่อสั้นสาขา (ไทย)",
+    "BillHeader":"หัวบิล",
+    "LocationCode":"รหัสตำแหน่ง",
+    "BranchAddress":"ที่อยู่",
+    "ProvinceID":"จังหวัด",
+    "CantonID":"อำเภอ/เขต",
+    "DistrictID":"ตำบล/แขวง",
+    "ZipCode":"รหัสไปรษณีย์",
+    "TelNo":"เบอร์โทรศัพท์",
+    "FaxNo":"เบอร์โทรสาร",
+    "Template":"รายการอาหาร",
+    "TemplateFood":"เทมเพลต รายการอาหาร",
+    "Tax":"ข้อมูล ภาษี",
+    "TaxNo":"หมายเลขผู้เสียภาษี",
+    "TaxBranchCode":"รหัสสาขา",
+    "Service":"ข้อมูล ค่าบริการ",
+    "ServiceCharge":"ค่าบริการ",
+    "Zone":"โซน",
+    "ZoneMain":"โซนหลัก",
+    "TypeServe":"ชนิดการสั่งอาหาร",
+    "ZoneData":"ข้อมูล โซน",
+    "ZoneName":"ชื่อ โซน",
+    "ZoneDescription":"ข้อมูลเพิ่มเติม",
+    "TableName":"ชื่อโต๊ะ",
+    "TableNo":"โต๊ะที่",
+    "To":"ถึง",
+    "ServiceZone":"ค่าบริการ",
+    "Available":"สามารถใช้งานได้",
+    "price":"ค่าบริการ",
+    "lastupdate":"แก้ไขล่าสุด",
+    "updateUser":"แก้ไขโดย"
   }
 }

@@ -1,0 +1,139 @@
+﻿
+<div class="col-xl-8 offset-xl-2 ">
+    <div bacardblur="" zoom-in="" class="animated fadeIn card  with-scroll">
+        <div class="card-header">
+            <h2 class="card-title" translate="" align="left">ISSUE DETAIL</h2>
+            
+                    <button class="btn btn-command btn-primary mr-2 "
+                    [disabled]="editCommandDisabled" 
+                    (click)="onEditClick()">
+                    <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
+                    <span>{{ "editButton" | translate: "COMMON" }}</span>
+                    </button>
+                <div class="pull-right">
+                        <button class="btn btn-warning navbar-btn"
+                        [disabled]="editCommandDisabled" 
+                        (click)="onEditClick()">
+                        <i class="fa fa-question" aria-hidden="true"></i>
+                        <span>Miss Issue</span>
+                        </button>
+                        <button class="btn btn-command btn-danger "
+                        [disabled]="deleteCommandDisabled" 
+                        (click)="onDeleteClick()">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <span>Cancel Issue</span>
+                        </button>
+                
+                </div>
+        
+        </div>
+        <div class="card-block">
+            
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Project Name</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="ProjectName" type="ProjectName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Ref.NO</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Reference NO." type="RefNO">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Module</label>
+                    <div class="col-xl-5">
+                    <ctm-textarea ></ctm-textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Description</label>
+                    <div class="col-xl-5">
+                    <ctm-textarea ></ctm-textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Expect Result</label>
+                    <div class="col-xl-5">
+                    <ctm-textarea ></ctm-textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Member</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Member" type="Member">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3" required>Priority</label>
+                    <div class="col-xl-3">
+                        <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">A</option>
+                            <option _ngcontent-c3="">B</option>
+                            <option _ngcontent-c3="">C</option>
+                            <option _ngcontent-c3="">D</option>
+                            <option _ngcontent-c3="">E</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" required>Found by</label>
+                    <div class="col-xl-5">
+                    <input class="form-control col-xl-6" placeholder="Found by" type="FoundBy">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3" required>Found Date</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Found Date" type="FoundDate">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3" required>Found Phase</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Found Phase" type="FoundPhase">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3" required>Cause</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Cause" type="Cause">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3">File Upload</label>
+                    <label class="col-xl-2 form-control-label"><a href="https://www.w3schools.com">Test.jpg</a></label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3">Dead line</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="Dead line" type="Deadline">
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <div class="offset-xl-4 col-xl-4">
+                    <div class="checkbox">
+                        <div _ngcontent-c5="" class="">
+                        <label _ngcontent-c5="" class="checkbox-inline custom-checkbox nowrap">
+                            <input _ngcontent-c5="" type="checkbox" value="undefined">
+                            <span _ngcontent-c5="">Remember me</span>
+                        </label>
+                        </div>
+                    </div>
+                    </div>
+                </div> -->
+        
+        </div> 
+        <div class="card-footer">
+            <div class="row">
+                <div class="offset-xl-2 col-xl-2 " align="center">
+                    <button class="btn btn-default col-xl-12" type="submit">Cancel</button>
+                </div>
+                <div class="offset-xl-3 col-xl-2" align="center">
+                    <button class="btn btn-warning col-xl-12" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,14 +32,22 @@ export const routes: Routes = [
                 path: "user",
                 loadChildren: "app/screens/+user/user.module#UserModule"
             },
+            {
+                path: "userinfo",
+                loadChildren: "app/screens/+userinfo/userinfo.module#userInfoModule"
+            },
+            {
+                path: "project",
+                loadChildren: "app/screens/+project/project.module#ProjectModule"
+            },
             {   
                 path : "master",
                 children : [
-              {
-                     path: "c",
-                     loadChildren: "app/screens/master/+common/common.module#MasterCommonModule"
-              },
-              
+                {
+                        path: "c",
+                        loadChildren: "app/screens/master/+common/common.module#MasterCommonModule"
+                },
+                
             	{
                      path: "",
                      redirectTo: "c",
@@ -56,11 +64,11 @@ export const routes: Routes = [
                 loadChildren: "app/screens/+adminSetting/adminSetting.module#AdminSettingModule"
                
             },
-			    {
-                      path: "",
-                      redirectTo: "dashboard",
-                      pathMatch: "full"
-                  }
+            {
+                    path: "",
+                    redirectTo: "project",
+                    pathMatch: "full"
+            }
         ],
         canActivate: [ AuthGuard ],
         canActivateChild: [ RoleGuard ]

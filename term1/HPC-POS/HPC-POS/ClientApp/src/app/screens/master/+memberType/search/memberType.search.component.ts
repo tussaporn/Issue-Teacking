@@ -138,8 +138,10 @@ export class MemberTypeSearchComponent extends ABaseComponent {
     }
 
     private onSelectRow(row) {
+        this.screenParam.newData = true; 
         this.screenParam.MemberTypeID = row.MemberTypeID;
         this.screenParam.criteria = this.resultData.criteria;
+        console.log(this.screenParam.MemberTypeID);
         this.router.navigate(["/s/master/mt/d"]);
         return false;
     }

@@ -1,0 +1,118 @@
+﻿
+
+<div class="container-fluid">
+    <div bacardblur="" zoom-in="" class="animated fadeIn card  with-scroll">
+        <div class="card-header">
+            <h2 class="card-title" translate="" align="left">Project Detail</h2>
+            
+                    <button class="btn btn-command btn-primary mr-2 "
+                    [disabled]="editCommandDisabled" 
+                    (click)="onEditClick()">
+                    <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
+                    <span>{{ "editButton" | translate: "COMMON" }}</span>
+                    </button>
+                <div class="pull-right">
+                        
+                        <button class="btn btn-command btn-danger "
+                        [disabled]="deleteCommandDisabled" 
+                        (click)="onDeleteClick()">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        <span>Delete Project</span>
+                        </button>
+                
+                </div>
+        
+        </div>
+        <div class="card-block">
+            
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label " for="inputEmail3" required>Project Name</label>
+                    <div class="col-xl-5">
+                    <input class="form-control" placeholder="ProjectName" type="ProjectName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputEmail3" required>Description</label>
+                    <div class="col-xl-5">
+                    <ctm-textarea ></ctm-textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Owner</label>
+                    <div class="col-xl-3">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">นาย A</option>
+                            <option _ngcontent-c3="">นาย B</option>
+                            <option _ngcontent-c3="">นาย C</option>
+                            <option _ngcontent-c3="">นาย D</option>
+                            <option _ngcontent-c3="">นาย E</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Assigner</label>
+                    <div class="col-xl-3">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">นาย A</option>
+                            <option _ngcontent-c3="">นาย B</option>
+                            <option _ngcontent-c3="">นาย C</option>
+                            <option _ngcontent-c3="">นาย D</option>
+                            <option _ngcontent-c3="">นาย E</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Checker</label>
+                    <div class="col-xl-3">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">นาย A</option>
+                            <option _ngcontent-c3="">นาย B</option>
+                            <option _ngcontent-c3="">นาย C</option>
+                            <option _ngcontent-c3="">นาย D</option>
+                            <option _ngcontent-c3="">นาย E</option>
+                        </select>
+                    </div>
+                    <label class="col-xl-2 form-control-label" for="inputPassword3 " required>Lowest Priority</label>
+                    <div class="col-xl-1">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">A</option>
+                            <option _ngcontent-c3="">B</option>
+                            <option _ngcontent-c3="">C</option>
+                            <option _ngcontent-c3="">D</option>
+                            <option _ngcontent-c3="">E</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Member</label>
+                    <div class="col-xl-3">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">นาย A</option>
+                            <option _ngcontent-c3="">นาย B</option>
+                            <option _ngcontent-c3="">นาย C</option>
+                            <option _ngcontent-c3="">นาย D</option>
+                            <option _ngcontent-c3="">นาย E</option>
+                        </select>
+                    </div>
+                    <label class="col-xl-1 form-control-label" for="inputPassword3 " required>Position</label>
+                    <div class="col-xl-2">
+                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                            <option _ngcontent-c3="">System Analysis</option>
+                            <option _ngcontent-c3="">Programer</option>
+                            <option _ngcontent-c3="">Tester</option>
+                        </select>
+                    </div>
+                </div>
+        </div> 
+        <div class="card-footer">
+            <div class="row">
+                <div class="offset-xl-1 col-xl-2 " align="center">
+                    <button class="btn btn-default col-xl-12" type="submit">Cancel</button>
+                </div>
+                <div class="offset-xl-6 col-xl-2" align="center">
+                    <button class="btn btn-warning col-xl-12" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- end card -->
+</div>

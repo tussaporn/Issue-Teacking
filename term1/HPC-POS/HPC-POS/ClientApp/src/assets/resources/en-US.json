@@ -15,8 +15,8 @@
     "CLI001": "Please assign search criteria first!"    
   },
   "COMMON": {
-    "companyName": "HUAPLA CHONGNONSEA",
-    "systemName": "POS MANAGEMENT SYSTEM",
+    "companyName": "C.S.I. Group",
+    "systemName": "Issue Tracking System",
     "logout": "Logout",
     "home": "Home",
     "searchCriteria": "Search Criteria",
@@ -50,7 +50,8 @@
     "tablePermissionImport": "Import",
     "tablePermissionExport": "Export",
     "adminButton":  "Go to Admin",
-    "checkerButton": "Go to Checker"
+    "checkerButton": "Go to Checker",
+    "actionButton": "Action"
   },
   "CMS010": {
     "loginHeader": "Please Sign In",
@@ -71,18 +72,19 @@
     "tableDescription": "Description",
     "tableFlagActive": "Active"
   },
-  "MAS030": {
-    "brandList": "Brand List",
-    "memberTypeName": "Member Type Name",
-    "tableNo": "No.",
+  "SCS011": {
+    "groupID": "Group ID",
+    "flagActive": "Status",
+    "nameEN": "Name (English)",
+    "nameLC": "Name (Thai)",
+    "description": "Description",
     "cashDiscount": "Cash Discount",
     "creditDiscount": "Credit Discount",
-    "updateDate": "Last Update",
-    "updateUser": "Last Update By",
-    "createDate": "Create Date",
-    "createUser": "Create By",
-    "discountValue": "Discount Value",
-    "discountType" : "Discount Type"
+    "groupHeader": "Group Information",
+    "userInGroupHeader": "User in Group",
+    "permissionHeader": "Permission Management",
+    "tablePermission": "Permission",
+    "tableUserName": "User Name"
   },
   "SCS020": {
     "userName": "User Name",
@@ -112,44 +114,59 @@
     "remark": "Remark",
     "telNo": "Tel."
   },
-  "Master": {
-    "ValueCode": "Value Code",
-    "Description": "Description",
-    "Value1": "Value1",
-    "Value2": "Value2",
-    "Value3": "Value3",
-    "FlagDefault": "Start Default"
-    
+  "MAS001":{
+    "notation" : "notation",
+    "type" : "type",
+    "ValueCode" : "ValueCode",
+    "Description" : "Description",
+    "value1" : "value 1",
+    "value2" : "value 2",
+    "value3" : "value 3",
+    "other" : "Default"
   },
-  "SCS011": {
-    "groupID": "Group ID",
-    "flagActive": "Status",
-    "nameEN": "Name (English)",
-    "nameLC": "Name (Thai)",
-    "description": "Description",
-    "cashDiscount": "Cash Discount",
-    "creditDiscount": "Credit Discount",
-    "groupHeader": "Group Information",
-    "userInGroupHeader": "User in Group",
-    "permissionHeader": "Permission Management",
-    "tablePermission": "Permission",
-    "tableUserName": "User Name"
+  "MAS020":{
+    "type":"Branch Type",
+    "branchName":"Branch Name",
+    "typeName":"Branch Type Name",
+    "price":"Price",
+    "lastupdate":"Update",
+    "updateUser":"Update By"
   },
-  "MAS031": {
-    "memberInf" : "Member Information",
-    "remark":"Remark",
-    "memberTypeName": "Member Type Name",
-    "cash": "Cash",
-    "discountValue": "Discount Value",
-    "discountType":"Discount Type",
-    "creditCard":"Credit Card",
-    "lifeTime":"Life Time",
-    "lifeTimeType":"Life Time Type",
-    "brandList": "Brand",
-    "select":"Select",
-    "startPeriod":"Start Date",
-    "endPeriod":"To",
-    "month":"Month"
-
+  "MAS021":{
+    "Type":"ประเภทธุรกิจ",
+    "BranchCode":"รหัสสาขา",
+    "BranchName":"สาขา",
+    "BranchShortEN":"ชื่อสั้นสาขา (อังกฤษ)",
+    "BranchShortTH":"ชื่อสั้นสาขา (ไทย)",
+    "BillHeader":"หัวบิล",
+    "LocationCode":"ชื่อประเภทธุรกิจ",
+    "BranchAddress":"ที่อยู่",
+    "ProvinceID":"จังหวัด",
+    "CantonID":"อำเภอ/เขต",
+    "DistrictID":"ตำบล/แขวง",
+    "ZipCode":"รหัสไปรษณีย์",
+    "TelNo":"เบอร์โทรศัพท์",
+    "FaxNo":"เบอร์โทรสาร",
+    "Template":"รายการอาหาร",
+    "TemplateFood":"เทมเพลต รายการอาหาร",
+    "Tax":"ข้อมูล ภาษี",
+    "TaxNo":"หมายเลขNoผู้เสียภาษี",
+    "TaxBranchCode":"รหัสสาขา",
+    "Service":"ข้อมูล ค่าบริการ",
+    "ServiceCharge":"ค่าบริการ",
+    "Zone":"โซน",
+    "ZoneMain":"โซนหลัก",
+    "TypeServe":"ชนิดการสั่งอาหาร",
+    "ZoneData":"ข้อมูล โซน",
+    "ZoneName":"ชื่อ โซน",
+    "ZoneDescription":"ข้อมูลเพิ่มเติม",
+    "TableName":"ชื่อโต๊ะ",
+    "TableNo":"โต๊ะที่",
+    "To":"ถึง",
+    "ServiceZone":"ค่าบริการ",
+    "Available":"สามารถใช้งานได้",
+    "price":"ค่าบริการ",
+    "lastupdate":"แก้ไขล่าสุด",
+    "updateUser":"แก้ไขโดย"
   }
 }

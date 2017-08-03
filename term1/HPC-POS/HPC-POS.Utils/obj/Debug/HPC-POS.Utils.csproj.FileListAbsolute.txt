@@ -11,3 +11,8 @@ D:\HPC-POS\HPC-POS\HPC-POS.Utils\bin\Debug\HPC-POS.Utils.pdb
 D:\HPC-POS\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.csprojResolveAssemblyReference.cache
 D:\HPC-POS\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.dll
 D:\HPC-POS\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.pdb
+D:\Issue-Teacking\term1\HPC-POS\HPC-POS.Utils\bin\Debug\HPC-POS.Utils.dll
+D:\Issue-Teacking\term1\HPC-POS\HPC-POS.Utils\bin\Debug\HPC-POS.Utils.pdb
+D:\Issue-Teacking\term1\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.csprojResolveAssemblyReference.cache
+D:\Issue-Teacking\term1\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.dll
+D:\Issue-Teacking\term1\HPC-POS\HPC-POS.Utils\obj\Debug\HPC-POS.Utils.pdb

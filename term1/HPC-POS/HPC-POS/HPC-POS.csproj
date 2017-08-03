@@ -4,6 +4,7 @@
     <TargetFramework>net452</TargetFramework>
     <RuntimeIdentifier>win7-x86</RuntimeIdentifier>
 	<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	<UserSecretsId>697029c2-b39c-4a34-82e0-a0a4b822a84c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +29,9 @@
     <ProjectReference Include="..\HPC-POS.POS.Api\HPC-POS.POS.Api.csproj" />
     <ProjectReference Include="..\HPC-POS.Utils\HPC-POS.Utils.csproj" />
     <ProjectReference Include="..\HPC-POS.Web\HPC-POS.Web.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

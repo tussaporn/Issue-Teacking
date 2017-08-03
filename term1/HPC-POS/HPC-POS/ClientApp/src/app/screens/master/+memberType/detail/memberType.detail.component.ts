@@ -69,7 +69,7 @@ export class MemberTypeDetailComponent extends ABaseComponent implements Confirm
        
   ) {
       super(router, route, spinner, translate, message, command, {
-            root: "/s/master/mt/d",
+            root: "/s/master/mt/s",
             screenParam: screenParam,
             commandMgr: {
                 

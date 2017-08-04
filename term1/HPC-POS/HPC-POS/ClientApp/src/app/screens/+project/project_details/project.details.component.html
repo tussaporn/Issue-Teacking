@@ -63,45 +63,72 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Checker</label>
-                    <div class="col-xl-3">
-                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
-                            <option _ngcontent-c3="">นาย A</option>
-                            <option _ngcontent-c3="">นาย B</option>
-                            <option _ngcontent-c3="">นาย C</option>
-                            <option _ngcontent-c3="">นาย D</option>
-                            <option _ngcontent-c3="">นาย E</option>
-                        </select>
-                    </div>
-                    <label class="col-xl-2 form-control-label" for="inputPassword3 " required>Lowest Priority</label>
-                    <div class="col-xl-1">
-                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
-                            <option _ngcontent-c3="">A</option>
-                            <option _ngcontent-c3="">B</option>
-                            <option _ngcontent-c3="">C</option>
-                            <option _ngcontent-c3="">D</option>
-                            <option _ngcontent-c3="">E</option>
-                        </select>
-                    </div>
+                    <div bacardblur="" zoom-in="" class="card-group col-xl-7 ">
+                        <div class="card ">
+                            <div class="card-block " id="checker_data">
+                                <div class="form-group row checker_data" id="checker_first" *ngFor="let row of checker" >
+                                <div class="col-xl-5">
+                                <select _ngcontent-c3="" class="form-control" id="exampleSelect1" (blur)="newInfo.user=onKey($event)">
+                                        <option _ngcontent-c3="ก">นาย A</option>
+                                        <option _ngcontent-c3="2">นาย B</option>
+                                        <option _ngcontent-c3="3">นาย C</option>
+                                        <option _ngcontent-c3="4">นาย D</option>
+                                        <option _ngcontent-c3="5">นาย E</option>
+                                    </select>
+                                </div>
+                                <label class="col-xl-3 form-control-label" for="inputPassword3 " required>Lowest Priority</label>
+                                <div class="col-xl-2">
+                                <select _ngcontent-c3="" class="form-control" id="exampleSelect1" (blur)="newInfo.priority=onKey($event)">
+                                        <option _ngcontent-c3="a">A</option>
+                                        <option _ngcontent-c3="2">B</option>
+                                        <option _ngcontent-c3="3">C</option>
+                                        <option _ngcontent-c3="4">D</option>
+                                        <option _ngcontent-c3="5">E</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-1">
+                                    <button (click)="onClickRemove(row.user)" class="btn btn-danger btn-icon add_btn btn_delete"><i class="ion-close" aria-hidden="true" ></i>{{row.user}}</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end card group -->
+                    <button (click)="addInfo(newInfo)" class="btn btn-default btn-icon add_btn" style="margin-top: 6px;"><i class="ion-plus-circled" aria-hidden="true" ></i></button>
+                    
+                    
                 </div>
                 <div class="form-group row">
                     <label class="col-xl-2 offset-xl-2 form-control-label" for="inputPassword3 " required>Member</label>
-                    <div class="col-xl-3">
-                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
-                            <option _ngcontent-c3="">นาย A</option>
-                            <option _ngcontent-c3="">นาย B</option>
-                            <option _ngcontent-c3="">นาย C</option>
-                            <option _ngcontent-c3="">นาย D</option>
-                            <option _ngcontent-c3="">นาย E</option>
-                        </select>
-                    </div>
-                    <label class="col-xl-1 form-control-label" for="inputPassword3 " required>Position</label>
-                    <div class="col-xl-2">
-                    <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
-                            <option _ngcontent-c3="">System Analysis</option>
-                            <option _ngcontent-c3="">Programer</option>
-                            <option _ngcontent-c3="">Tester</option>
-                        </select>
-                    </div>
+                    <div bacardblur="" zoom-in="" class="card-group col-xl-6 ">
+                        <div class="card ">
+                            <div class="card-block " id="member_data">
+                                <div class="form-group row member_data" id="member_first" >
+                                <div class="col-xl-6">
+                                <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                                        <option _ngcontent-c3="">นาย A</option>
+                                        <option _ngcontent-c3="">นาย B</option>
+                                        <option _ngcontent-c3="">นาย C</option>
+                                        <option _ngcontent-c3="">นาย D</option>
+                                        <option _ngcontent-c3="">นาย E</option>
+                                    </select>
+                                </div>
+                                <label class="col-xl-2 form-control-label" for="inputPassword3 " required>Position</label>
+                                <div class="col-xl-4">
+                                <select _ngcontent-c3="" class="form-control" id="exampleSelect1">
+                                        <option _ngcontent-c3="">System Analysis</option>
+                                        <option _ngcontent-c3="">Programer</option>
+                                        <option _ngcontent-c3="">Tester</option>
+                                    </select>
+                                </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end card group -->
+                    <button (click)="InsertMember()" class="btn btn-default btn-icon " style="margin-top: 6px;"><i class="ion-plus-circled" aria-hidden="true" ></i></button>
+                   
+                    <button (click)="DeleteMember()" class="btn btn-danger btn-icon add_btn" style="margin-top: 6px;margin-left: 6px;"><i class="ion-close" aria-hidden="true" ></i></button>
+                    
                 </div>
         </div> 
         <div class="card-footer">
@@ -116,3 +143,16 @@
         </div>
     </div><!-- end card -->
 </div>
+
+
+
+<ul>
+  <li *ngFor="let info of information">
+   <pre>{{ info.description }} </pre>
+  </li>
+</ul>
+
+<input 
+   (keyup)="newInfo=onKey($event)">
+
+<button (click)=addInfo(newInfo)>Add</button>

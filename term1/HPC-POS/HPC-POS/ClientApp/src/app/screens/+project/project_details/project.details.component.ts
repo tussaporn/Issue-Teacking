@@ -50,9 +50,14 @@ export class ProjectDetailsComponent extends ABaseComponent implements ConfirmCh
     private controlDisabled: boolean = true;
     private tmpUserName: string;
     private resultData: CtmTableData;
-
-    
-
+    private checker = [
+  
+      new checkers('1','')
+  ];
+    private newInfo = [
+  
+      new checkers('','')
+  ];
     constructor(
         router: Router,
         route: ActivatedRoute,
@@ -75,8 +80,11 @@ export class ProjectDetailsComponent extends ABaseComponent implements ConfirmCh
 
       
          
+       
         
   }
+
+    
 
   get screenCommand() { return this.commandCtrl; }
   get screenChanged() : boolean {
@@ -84,6 +92,7 @@ export class ProjectDetailsComponent extends ABaseComponent implements ConfirmCh
   }
   
   initScreen(): Promise<Object> {
+    
     return ;     
   }
   resetChanged() {
@@ -97,6 +106,50 @@ export class ProjectDetailsComponent extends ABaseComponent implements ConfirmCh
    
   }
 
+  InsertChecker(){
+        $("#checker_first").clone().appendTo('#checker_data');
+  }
+    
+  InsertMember(){
+        $("#member_first").clone().appendTo('#member_data');
+  }
+
+  DeleteChecker(){
+       if($(".checker_data").length>1)
+            // $(".checker_data").last().remove();
+            $('.btn_delete').parent().parent().remove();
+  }
+
+   DeleteMember(){
+       if($(".member_data").length>1)
+            $(".member_data").last().remove();
+  }
+    
+
+
+
+   
+
   
-       
+  addInfo(newInfo:any) {
+      console.log(this.checker);
+     
+    if (newInfo) {
+        this.checker.push(new checkers( $('.checker_data').length+1,newInfo.priority));
+    }
+  }
+    onKey(event:any) { // without type info
+    return event.target.value;
+  }
+    onClickRemove(index)
+    {
+        console.log(index);
+    //Replace your model here 
+    this.checker.splice(index-1, 1);
+    }
+}
+class checkers {
+constructor(
+    public user ,
+    public priority:string) { }
 }
